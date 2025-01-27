@@ -63,11 +63,14 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_usuario = db.Column(db.String(80), unique=True, nullable=False)
     contrasenia = db.Column(db.String(120), unique=False, nullable=False)
-    imagen_perfil = db.Column(db.String(120), unique=True, nullable=True)
+    imagen_perfil = db.Column(db.String(1000), unique=True, nullable=True)
   
+    def validate_password(self, password):
+        if len(password) < 8:
+            raise ValidationError("La contraseña debe tener al menos 8 caracteres")
+        return True
+
     def set_password(self, password):
-        if not password or len(password) < 6:
-            raise ValidationError("Password must be at least 6 characters long")
         self.contrasenia = generate_password_hash(password)
 
     def check_password(self, password):
@@ -187,4 +190,93 @@ db.create_all()
 
 # ----------------------------------------------------------------------------------------- ROUTES/CRUD -----------------------------------------------------------------------------------------
 
+# -------------------------------------------------------------------
+# Server Test
+# -------------------------------------------------------------------
 
+# Create a test route
+@app.route('/test', methods=['GET'])
+def test():
+  return jsonify({'message': 'The server is running 🥳.'})
+
+# -------------------------------------------------------------------
+# User CRUD
+# -------------------------------------------------------------------
+
+# Create a new user.
+@app.route('/usuarios', methods=['POST'])
+def create_user():
+    try:
+        data = request.get_json()
+        new_user = User(nombre_usuario=data['nombre_usuario'])
+        new_user.validate_password(data['contrasenia'])
+        new_user.set_password(data['contrasenia'])
+        if data.get('imagen_perfil'):
+            new_user.imagen_perfil = data['imagen_perfil']
+        db.session.add(new_user)
+        db.session.commit()
+        return new_user.json(), 201
+    except ValidationError as e:
+        return e.messages, 400
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
+    
+# Start a session.
+@app.route('/usuarios/login', methods=['POST'])
+def login():
+    try:
+        data = request.get_json()
+        user = User.query.filter_by(nombre_usuario=data['nombre_usuario']).first()
+        if user and user.check_password(data['contrasenia']):
+            return user.json(), 200
+        return {"error": "Invalid username or password"}, 401
+    except SQLAlchemyError as e:
+        return {"error": str(e)}, 400
+
+# Logout.
+@app.route('/usuarios/logout', methods=['POST'])
+def logout():
+    return {"message": "Logout successful"}, 200
+
+# Get all users.
+@app.route('/usuarios', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    return jsonify([user.json() for user in users]), 200
+
+# Get a user by id.
+@app.route('/usuarios/<int:id>', methods=['GET'])
+def get_user(id):
+    user = User.query.get(id)
+    if user:
+        return user.json(), 200
+    return {"error": "User not found"}, 404
+
+# Update a user by id.
+@app.route('/usuarios/<int:id>', methods=['PUT'])
+def update_user(id):
+    try:
+        data = request.get_json()
+        user = User.query.get(id)
+        if user:
+            user.nombre_usuario = data.get('nombre_usuario', user.nombre_usuario)
+            user.set_password(data.get('contrasenia', user.contrasenia))
+            db.session.commit()
+            return user.json(), 200
+        return {"error": "User not found"}, 404
+    except ValidationError as e:
+        return e.messages, 400
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"error": str(e)},
+
+# Delete a user by id.
+@app.route('/usuarios/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.get(id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return user.json(), 200
+    return {"error": "User not found"}, 404
