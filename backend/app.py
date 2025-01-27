@@ -347,3 +347,84 @@ def delete_category(id):
 # -------------------------------------------------------------------
 # Task CRUD
 # -------------------------------------------------------------------
+
+# Create a new task.
+@app.route('/tareas', methods=['POST'])
+def create_task():
+    try:
+        data = request.get_json()
+
+        user = User.query.get(data['user_id'])
+        category = Category.query.get(data['category_id'])
+        
+        if not user:
+            return {"error": f"User with id {data['user_id']} not found"}, 404
+        if not category:
+            return {"error": f"Category with id {data['category_id']} not found"}, 404
+
+        new_task = Task(
+            texto_tarea=data['texto_tarea'],
+            fecha_tentativa_finalizacion=datetime.strptime(data['fecha_tentativa_finalizacion'], '%Y-%m-%d'),
+            estado=data['estado'],
+            user_id=data['user_id'],
+            category_id=data['category_id']
+        )
+
+        db.session.add(new_task)
+        db.session.commit()
+        return new_task.json(), 201
+
+    except ValidationError as e:
+        return {"error": e.messages}, 400
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
+    except ValueError as e:
+        return {"error": "Invalid date format. Use YYYY-MM-DD"}, 400
+
+# Get all tasks.
+@app.route('/tareas', methods=['GET'])
+def get_tasks():
+    tasks = Task.query.all()
+    return jsonify([task.json() for task in tasks]), 200
+
+# Get a task by id.
+@app.route('/tareas/<int:id>', methods=['GET'])
+def get_task(id):
+    task = Task.query.get(id)
+    if task:
+        return task.json(), 200
+    return {"error": "Task not found"}, 404
+
+# Update a task by id.
+@app.route('/tareas/<int:id>', methods=['PUT'])
+def update_task(id):
+    try:
+        data = request.get_json()
+        task = Task.query.get(id)
+        if task:
+            task.texto_tarea = data.get('texto_tarea', task.texto_tarea)
+            task.fecha_tentativa_finalizacion = datetime.strptime(data.get('fecha_tentativa_finalizacion', task.fecha_tentativa_finalizacion), '%Y-%m-%d')
+            task.estado = data.get('estado', task.estado)
+            task.user_id = data.get('user_id', task.user_id)
+            task.category_id = data.get('category_id', task.category_id)
+            db.session.commit()
+            return task.json(), 200
+        return {"error": "Task not found"}, 404
+    except ValidationError as e:
+        return e.messages, 400
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
+    except ValueError as e:
+        return {"error": "Invalid date format. Use YYYY-MM-DD"}, 400
+    
+# Delete a task by id.
+@app.route('/tareas/<int:id>', methods=['DELETE'])
+def delete_task(id):
+    task = Task.query.get(id)
+    if task:
+        db.session.delete(task)
+        db.session.commit()
+        return task.json(), 200
+    return {"error": "Task not found"}, 404
