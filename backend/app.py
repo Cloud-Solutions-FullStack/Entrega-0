@@ -280,3 +280,70 @@ def delete_user(id):
         db.session.commit()
         return user.json(), 200
     return {"error": "User not found"}, 404
+
+# -------------------------------------------------------------------
+# Category CRUD
+# -------------------------------------------------------------------
+
+# Create a new category.
+@app.route('/categorias', methods=['POST'])
+def create_category():
+    try:
+        data = request.get_json()
+        new_category = Category(nombre=data['nombre'])
+        if data.get('descripcion'):
+            new_category.descripcion = data['descripcion']
+        db.session.add(new_category)
+        db.session.commit()
+        return new_category.json(), 201
+    except ValidationError as e:
+        return e.messages, 400
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
+
+# Get all categories.
+@app.route('/categorias', methods=['GET'])
+def get_categories():
+    categories = Category.query.all()
+    return jsonify([category.json() for category in categories]), 200
+
+# Get a category by id.
+@app.route('/categorias/<int:id>', methods=['GET'])
+def get_category(id):
+    category = Category.query.get(id)
+    if category:
+        return category.json(), 200
+    return {"error": "Category not found"}, 404
+
+# Update a category by id.
+@app.route('/categorias/<int:id>', methods=['PUT'])
+def update_category(id):
+    try:
+        data = request.get_json()
+        category = Category.query.get(id)
+        if category:
+            category.nombre = data.get('nombre', category.nombre)
+            category.descripcion = data.get('descripcion', category.descripcion)
+            db.session.commit()
+            return category.json(), 200
+        return {"error": "Category not found"}, 404
+    except ValidationError as e:
+        return e.messages, 400
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"error": str(e)}, 400
+
+# Delete a category by id.
+@app.route('/categorias/<int:id>', methods=['DELETE'])
+def delete_category(id):
+    category = Category.query.get(id)
+    if category:
+        db.session.delete(category)
+        db.session.commit()
+        return category.json(), 200
+    return {"error": "Category not found"}, 404
+
+# -------------------------------------------------------------------
+# Task CRUD
+# -------------------------------------------------------------------
