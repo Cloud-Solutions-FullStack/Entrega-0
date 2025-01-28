@@ -35,7 +35,18 @@ from datetime import datetime, timezone
 app = Flask(__name__)
 
 # Enable CORS: Allow requests from the frontend.
-CORS(app)
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "http://172.22.176.1:3000",
+            "http://localhost:3000",
+            "http://localhost:4000"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization", "Accept"],
+        "supports_credentials": True
+    }
+})
 
 # Database configuration: Use the DATABASE_URL environment variable (dockerfile).
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
