@@ -52,7 +52,7 @@
 								"exec": [
 									"var data = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"new_user1_id\",data.id);\r",
-									"tests[\"No genera error en el post de un usuario\"]=responseCode.code==201;"
+									"tests[\"No genera error crearr un usuario.\"]=responseCode.code==201;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -67,7 +67,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre_usuario\": \"sbob\",\r\n    \"contrasenia\": \"Bob123!\"\r\n}",
+							"raw": "{\r\n    \"nombre_usuario\": \"sbob\",\r\n    \"contrasenia\": \"Bobi123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -97,7 +97,7 @@
 								"exec": [
 									"var data = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"new_user2_id\",data.id);\r",
-									"tests[\"No genera error en el post de un usuario\"]=responseCode.code==201;"
+									"tests[\"No genera error crearr un usuario.\"]=responseCode.code==201;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -112,7 +112,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre_usuario\": \"fbob\",\r\n    \"contrasenia\": \"Bob789!\",\r\n    \"imagen_perfil\": \"https://plus.unsplash.com/premium_photo-1734713078804-818d9e818c9c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&xid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}",
+							"raw": "{\r\n    \"nombre_usuario\": \"fbob\",\r\n    \"contrasenia\": \"Bobi789!\",\r\n    \"imagen_perfil\": \"https://plus.unsplash.com/premium_photo-1734713078804-818d9e818c9c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&xid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -142,7 +142,7 @@
 								"exec": [
 									"var data = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"new_user3_id\",data.id);\r",
-									"tests[\"No genera error en el post de un usuario\"]=responseCode.code==201;"
+									"tests[\"No genera error crearr un usuario.\"]=responseCode.code==201;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -157,7 +157,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre_usuario\": \"jbob\",\r\n    \"contrasenia\": \"123456789\",\r\n    \"imagen_perfil\": \"https://plus.unsplash.com/premium_photo-1734713078804-818d9e818c9c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&xid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}",
+							"raw": "{\r\n    \"nombre_usuario\": \"jbob\",\r\n    \"contrasenia\": \"123456789\",\r\n    \"imagen_perfil\": \"https://plus.unsplash.com/premium_photo-1737392495759-2aace4708e48?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxN3x8fGVufDB8fHx8fA%3D%3D\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,7 +185,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"Se genera error en el post de un usuario con nombre duplicado.\"]=responseCode.code==400;"
+									"tests[\"Se genera error al crear un usuario con nombre duplicado.\"]=responseCode.code==400;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -200,7 +200,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre_usuario\": \"fbob\",\r\n    \"contrasenia\": \"Bob789!\"\r\n}",
+							"raw": "{\r\n    \"nombre_usuario\": \"fbob\",\r\n    \"contrasenia\": \"Bobi789!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,7 +228,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"Se genera error en el post de un usuario con contraseña debil.\"]=responseCode.code==400;"
+									"tests[\"Se genera error en al crear un usuario con contraseña corta.\"]=responseCode.code==400;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -307,7 +307,7 @@
 								"exec": [
 									"var data = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"login_id\",data.id);\r",
-									"tests[\"No genera error en el post de un usuario\"]=responseCode.code==200;z"
+									"tests[\"No genera error buscar al usario y ver que su contrseña es correcta.\"]=responseCode.code==200;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -322,7 +322,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre_usuario\": \"sbob\",\r\n    \"contrasenia\": \"Bob123!\"\r\n}",
+							"raw": "{\r\n    \"nombre_usuario\": \"sbob\",\r\n    \"contrasenia\": \"Bobi123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -351,7 +351,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"No genera error en el post de un usuario\"]=responseCode.code==401;"
+									"tests[\"Se generar error cuando el usuario / contrseña son incorrectos.\"]=responseCode.code==401;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -395,7 +395,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"No genera error en el post de un usuario\"]=responseCode.code==200;"
+									"tests[\"No genera error salir del usuario actual.\"]=responseCode.code==200;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -430,7 +430,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"No genera error traer todos los usuarios.\"]=responseCode.code==200;"
+									"tests[\"No genera error traer un usuario con un Id especifico.\"]=responseCode.code==200;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -465,7 +465,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"No genera error traer todos los usuarios.\"]=responseCode.code==200;"
+									"tests[\"No genera error eliminar un usuario con Id especifico.\"]=responseCode.code==200;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -534,7 +534,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"No genera error traer todos los usuarios.\"]=responseCode.code==200;"
+									"tests[\"No genera error actualizar la información de un usuarios identificado con Id especifico.\"]=responseCode.code==200;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -549,7 +549,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre_usuario\": \"ccbob\",\r\n    \"contrasenia\": \"Bob123!\"\r\n}",
+							"raw": "{\r\n    \"nombre_usuario\": \"ccbob\",\r\n    \"contrasenia\": \"Bobi123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -612,7 +612,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"No genera error traer todos los usuarios.\"]=responseCode.code==200;"
+									"tests[\"No genera error eliminar un usuario con Id especifico.\"]=responseCode.code==200;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -647,7 +647,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"No genera error traer todos los usuarios.\"]=responseCode.code==200;"
+									"tests[\"No genera error eliminar un usuario con Id especifico.\"]=responseCode.code==200;"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -712,7 +712,989 @@
 			]
 		},
 		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Get All Categorias (Vacio)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las categorias.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"new_categoria_id\",data.id);\r",
+									"tests[\"No genera error crear una categoria.\"]=responseCode.code==201;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Trabajo\",\r\n    \"descripcion\":\"Asistencia graduada en la U. de los Andes.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categorias 2.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las categorias.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error actualizar la información de una categoria identificado con Id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Trabajo\",\r\n    \"descripcion\":\"Asistencia graduada en la U. de los Andes en Optimización.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/categorias/{{new_categoria_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias",
+								"{{new_categoria_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categorias 3.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las categorias.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoria por ID Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error eliminar una categoria con Id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categorias/{{new_categoria_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias",
+								"{{new_categoria_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categorias (Vacio) 4.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las categorias.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tareas",
+			"item": [
+				{
+					"name": "Get All Tareas (Vacio)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las tareas sin importar el usuario.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"new_user1_id\",data.id);\r",
+									"tests[\"No genera error crearr un usuario.\"]=responseCode.code==201;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre_usuario\": \"sbob\",\r\n    \"contrasenia\": \"Bobi123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"new_categoria_id\",data.id);\r",
+									"tests[\"No genera error crear una categoria.\"]=responseCode.code==201;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Trabajo\",\r\n    \"descripcion\":\"Asistencia graduada en la U. de los Andes.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Tarea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"new_task_id\",data.id);\r",
+									"tests[\"No genera error crear una tarea para un usario.\"]=responseCode.code==201;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto_tarea\":\"Entrenamiento 2\",\r\n    \"fecha_tentativa_finalizacion\":\"2025-06-25\",\r\n    \"estado\": \"PENDIENTE\",\r\n    \"user_id\": {{new_user1_id}},\r\n    \"category_id\": {{new_categoria_id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Tarea 2.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Genera error crear una tarea donde la fecha de finalización sea inferior a hoy.\"]=responseCode.code==400;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto_tarea\":\"Entrenamiento 2\",\r\n    \"fecha_tentativa_finalizacion\":\"2024-06-25\",\r\n    \"estado\": \"PENDIENTE\",\r\n    \"user_id\": {{new_user1_id}},\r\n    \"category_id\": {{new_categoria_id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Tarea 3.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Genera error crear una tarea donde el usuario no existe.\"]=responseCode.code==404;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto_tarea\":\"Entrenamiento 2\",\r\n    \"fecha_tentativa_finalizacion\":\"2024-06-25\",\r\n    \"estado\": \"PENDIENTE\",\r\n    \"user_id\": 1000,\r\n    \"category_id\": {{new_categoria_id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Tarea 4.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Genera error crear una tarea donde el usuario no existe.\"]=responseCode.code==404;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto_tarea\":\"Entrenamiento 2\",\r\n    \"fecha_tentativa_finalizacion\":\"2024-06-25\",\r\n    \"estado\": \"PENDIENTE\",\r\n    \"user_id\": {{new_user1_id}},\r\n    \"category_id\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Tarea 5.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"new_task2_id\",data.id);\r",
+									"tests[\"No genera error crear una tarea para un usario.\"]=responseCode.code==201;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto_tarea\":\"Entrenamiento 3\",\r\n    \"fecha_tentativa_finalizacion\":\"2025-10-25\",\r\n    \"estado\": \"PENDIENTE\",\r\n    \"user_id\": {{new_user1_id}},\r\n    \"category_id\": {{new_categoria_id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tareas 2.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las tareas sin importar el usuario.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tarea by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas una tarea especifica con ID.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/tareas/{{new_task2_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas",
+								"{{new_task2_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tareas by USer ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las tareas de un usuario con id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/usuario/{{new_user1_id}}/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"usuario",
+								"{{new_user1_id}}",
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Tarea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error actualizar la información de una tarea identificada con Id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto_tarea\":\"Entrenamiento 3\",\r\n    \"fecha_tentativa_finalizacion\":\"2028-10-25\",\r\n    \"estado\": \"EN_PROGRESO\",\r\n    \"user_id\": {{new_user1_id}},\r\n    \"category_id\": {{new_categoria_id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/tareas/{{new_task2_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas",
+								"{{new_task2_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tareas 3.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las tareas sin importar el usuario.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Tarea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error eliminar una tarea con Id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/tareas/{{new_task_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas",
+								"{{new_task_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Tarea 2.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error eliminar una tarea con Id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/tareas/{{new_task2_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas",
+								"{{new_task2_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoria por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error eliminar una categoria con Id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categorias/{{new_categoria_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categorias",
+								"{{new_categoria_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error eliminar un usuario con Id especifico.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/usuarios/{{new_user1_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"usuarios",
+								"{{new_user1_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tareas (Vacio) 4.0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"No genera error traer todas las tareas sin importar el usuario.\"]=responseCode.code==200;"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/tareas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Test Server",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"El servidor responde de manera adecuada a una conexión de prueba.\"]=responseCode.code==200;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],

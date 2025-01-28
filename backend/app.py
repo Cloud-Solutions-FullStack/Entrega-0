@@ -143,7 +143,7 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     texto_tarea = db.Column(db.String(80), unique=False, nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-    fecha_tentativa_finalizacion = db.Column(db.Date, unique=False, nullable=False)
+    fecha_tentativa_finalizacion = db.Column(db.DateTime, unique=False, nullable=False)
     estado = db.Column(db.String(120), unique=False, nullable=False)
 
     # Foreign keys
@@ -161,8 +161,25 @@ class Task(db.Model):
     
     @validates('fecha_tentativa_finalizacion')
     def validate_fecha_tentativa_finalizacion(self, key, date):
-        if date < datetime.now(timezone.utc).date():
+        if isinstance(date, str):
+            try:
+                # Parse string to naive datetime
+                naive_date = datetime.strptime(date, '%Y-%m-%d')
+                # Make it timezone aware with UTC
+                date = naive_date.replace(tzinfo=timezone.utc)
+            except ValueError:
+                raise ValidationError("Invalid date format. Use YYYY-MM-DD")
+        elif isinstance(date, datetime) and date.tzinfo is None:
+            # Make naive datetime timezone aware
+            date = date.replace(tzinfo=timezone.utc)
+
+        # Get current time in UTC
+        now = datetime.now(timezone.utc)
+
+        # Compare timezone-aware datetimes
+        if date < now:
             raise ValidationError("Expected completion date cannot be in the past")
+
         return date
 
     def json(self):
@@ -217,7 +234,7 @@ def create_user():
         db.session.commit()
         return new_user.json(), 201
     except ValidationError as e:
-        return e.messages, 400
+        return jsonify({"errors": e.messages}), 400
     except SQLAlchemyError as e:
         db.session.rollback()
         return {"error": str(e)}, 400
@@ -259,6 +276,7 @@ def update_user(id):
     try:
         data = request.get_json()
         user = User.query.get(id)
+        user.validate_password(data['contrasenia'])
         if user:
             user.nombre_usuario = data.get('nombre_usuario', user.nombre_usuario)
             user.set_password(data.get('contrasenia', user.contrasenia))
@@ -266,7 +284,7 @@ def update_user(id):
             return user.json(), 200
         return {"error": "User not found"}, 404
     except ValidationError as e:
-        return e.messages, 400
+        return jsonify({"errors": e.messages}), 400
     except SQLAlchemyError as e:
         db.session.rollback()
         return {"error": str(e)},
@@ -297,7 +315,7 @@ def create_category():
         db.session.commit()
         return new_category.json(), 201
     except ValidationError as e:
-        return e.messages, 400
+        return jsonify({"errors": e.messages}), 400
     except SQLAlchemyError as e:
         db.session.rollback()
         return {"error": str(e)}, 400
@@ -329,7 +347,7 @@ def update_category(id):
             return category.json(), 200
         return {"error": "Category not found"}, 404
     except ValidationError as e:
-        return e.messages, 400
+        return jsonify({"errors": e.messages}), 400
     except SQLAlchemyError as e:
         db.session.rollback()
         return {"error": str(e)}, 400
@@ -388,6 +406,12 @@ def get_tasks():
     tasks = Task.query.all()
     return jsonify([task.json() for task in tasks]), 200
 
+# Get all tasks by user id.
+@app.route('/usuario/<int:user_id>/tareas', methods=['GET'])
+def get_tasks_by_user(user_id):
+    tasks = Task.query.filter_by(user_id=user_id).all()
+    return jsonify([task.json() for task in tasks]), 200
+
 # Get a task by id.
 @app.route('/tareas/<int:id>', methods=['GET'])
 def get_task(id):
@@ -411,8 +435,9 @@ def update_task(id):
             db.session.commit()
             return task.json(), 200
         return {"error": "Task not found"}, 404
+    
     except ValidationError as e:
-        return e.messages, 400
+        return jsonify({"errors": e.messages}), 400
     except SQLAlchemyError as e:
         db.session.rollback()
         return {"error": str(e)}, 400
