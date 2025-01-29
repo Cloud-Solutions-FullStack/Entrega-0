@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Box, Typography, Alert, Stack } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import '../../styles/Auth.css';
 
 const Login = () => {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     usuario: '',
     contraseña: ''
@@ -91,6 +94,7 @@ const Login = () => {
             fullWidth
             size="large"
             className="register-button"
+            onClick={() => navigate('/register')}
           >
             Crear Usuario
           </Button>
