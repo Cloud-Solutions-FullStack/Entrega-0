@@ -25,7 +25,11 @@ from flask_cors import CORS
 from os import environ
 
 # Datetime: Date and time utilities.
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+
+# JWT: JSON Web Tokens, for user authentication.
+from flask_jwt_extended import create_access_token, jwt_required, JWTManager
+
 
 # -------------------------------------------------------------------
 # App Configuration
@@ -53,6 +57,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 
 # SQLAlchemy configuration: Track modifications to the database.
 db = SQLAlchemy(app)
+
+# Add JWT configuration to your Flask app
+app.config['JWT_SECRET_KEY'] = 'your-secret-key'  # Change this to a secure secret key
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
+jwt = JWTManager(app)
 
 # ----------------------------------------------------------------------------------------- MODELS -----------------------------------------------------------------------------------------
 
@@ -117,6 +126,7 @@ class Category(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   nombre = db.Column(db.String(80), unique=True, nullable=False)
   descripcion = db.Column(db.String(250), unique=False, nullable=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
 
   def json(self):
         try:
@@ -124,6 +134,7 @@ class Category(db.Model):
                 'id': self.id,
                 'nombre': self.nombre,
                 'descripcion': self.descripcion,
+                'user_id': self.user_id,
             }
         except Exception as e:
             return {
@@ -257,13 +268,20 @@ def login():
         data = request.get_json()
         user = User.query.filter_by(nombre_usuario=data['nombre_usuario']).first()
         if user and user.check_password(data['contrasenia']):
-            return user.json(), 200
+            # Create access token
+            access_token = create_access_token(identity=user.id)
+
+            return {
+                'token': access_token,
+                'user': user.json()
+            }, 200
         return {"error": "Invalid username or password"}, 401
     except SQLAlchemyError as e:
         return {"error": str(e)}, 400
 
 # Logout.
 @app.route('/usuarios/logout', methods=['POST'])
+@jwt_required()
 def logout():
     return {"message": "Logout successful"}, 200
 
@@ -283,6 +301,7 @@ def get_user(id):
 
 # Update a user by id.
 @app.route('/usuarios/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_user(id):
     try:
         data = request.get_json()
@@ -302,6 +321,7 @@ def update_user(id):
 
 # Delete a user by id.
 @app.route('/usuarios/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_user(id):
     user = User.query.get(id)
     if user:
@@ -316,12 +336,22 @@ def delete_user(id):
 
 # Create a new category.
 @app.route('/categorias', methods=['POST'])
+@jwt_required()
 def create_category():
     try:
         data = request.get_json()
-        new_category = Category(nombre=data['nombre'])
-        if data.get('descripcion'):
-            new_category.descripcion = data['descripcion']
+
+        user = User.query.get(data['user_id'])
+        if not user:
+            return {"error": f"User with id {data['user_id']} not found"}, 404
+
+        # Create category with validated data
+        new_category = Category(
+            nombre=data['nombre'].strip(),
+            user_id=data['user_id'],
+            descripcion=data.get('descripcion', '').strip()
+        )
+        
         db.session.add(new_category)
         db.session.commit()
         return new_category.json(), 201
@@ -345,8 +375,16 @@ def get_category(id):
         return category.json(), 200
     return {"error": "Category not found"}, 404
 
+# Get all categories by user id.
+@app.route('/usuario/<int:user_id>/categorias', methods=['GET'])
+@jwt_required()
+def get_categories_by_user(user_id):
+    categories = Category.query.filter_by(user_id=user_id).all()
+    return jsonify([category.json() for category in categories]), 200
+
 # Update a category by id.
 @app.route('/categorias/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_category(id):
     try:
         data = request.get_json()
@@ -365,6 +403,7 @@ def update_category(id):
 
 # Delete a category by id.
 @app.route('/categorias/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_category(id):
     category = Category.query.get(id)
     if category:
@@ -379,6 +418,7 @@ def delete_category(id):
 
 # Create a new task.
 @app.route('/tareas', methods=['POST'])
+@jwt_required()
 def create_task():
     try:
         data = request.get_json()
@@ -419,6 +459,7 @@ def get_tasks():
 
 # Get all tasks by user id.
 @app.route('/usuario/<int:user_id>/tareas', methods=['GET'])
+@jwt_required()
 def get_tasks_by_user(user_id):
     tasks = Task.query.filter_by(user_id=user_id).all()
     return jsonify([task.json() for task in tasks]), 200
@@ -433,6 +474,7 @@ def get_task(id):
 
 # Update a task by id.
 @app.route('/tareas/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_task(id):
     try:
         data = request.get_json()
@@ -457,6 +499,7 @@ def update_task(id):
     
 # Delete a task by id.
 @app.route('/tareas/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_task(id):
     task = Task.query.get(id)
     if task:

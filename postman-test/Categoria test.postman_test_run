@@ -1,0 +1,490 @@
+{
+	"id": "a52ed97f-1ff0-42b9-94f3-b65f99cb17a3",
+	"name": "Entrega-0 Server test",
+	"timestamp": "2025-01-29T16:19:09.746Z",
+	"collection_id": "12650312-6a08f88d-66d3-4848-bdd0-f58586152709",
+	"folder_id": "12650312-908da67e-f64b-41c4-b2dd-edeaef3932b6",
+	"environment_id": "0",
+	"totalPass": 36,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-01-29T16:19:03.500Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "680ed037-6d46-4a59-9199-fa23d7eaf3f5",
+			"name": "Get All Categorias (Vacio)",
+			"url": "http://localhost:4000/categorias",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las categorias.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las categorias.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23,
+				35,
+				22
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				}
+			]
+		},
+		{
+			"id": "e330145c-5be8-499c-864d-8625233b7731",
+			"name": "Crear Usuario",
+			"url": "http://localhost:4000/usuarios",
+			"time": 375,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"No genera error crearr un usuario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error crearr un usuario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				344,
+				368,
+				375
+			],
+			"allTests": [
+				{
+					"No genera error crearr un usuario.": true
+				},
+				{
+					"No genera error crearr un usuario.": true
+				},
+				{
+					"No genera error crearr un usuario.": true
+				}
+			]
+		},
+		{
+			"id": "34ac516f-4e74-4eb6-861a-7bd6a60ea9ce",
+			"name": "Log In Usuario",
+			"url": "http://localhost:4000/usuarios/login",
+			"time": 390,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error buscar al usario y ver que su contrseña es correcta.": true
+			},
+			"testPassFailCounts": {
+				"No genera error buscar al usario y ver que su contrseña es correcta.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				379,
+				515,
+				390
+			],
+			"allTests": [
+				{
+					"No genera error buscar al usario y ver que su contrseña es correcta.": true
+				},
+				{
+					"No genera error buscar al usario y ver que su contrseña es correcta.": true
+				},
+				{
+					"No genera error buscar al usario y ver que su contrseña es correcta.": true
+				}
+			]
+		},
+		{
+			"id": "02859e7f-8bf9-4ce9-a9cb-58c9c87b9e85",
+			"name": "Crear Categoria",
+			"url": "http://localhost:4000/categorias",
+			"time": 77,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"No genera error crear una categoria.": true
+			},
+			"testPassFailCounts": {
+				"No genera error crear una categoria.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				38,
+				47,
+				77
+			],
+			"allTests": [
+				{
+					"No genera error crear una categoria.": true
+				},
+				{
+					"No genera error crear una categoria.": true
+				},
+				{
+					"No genera error crear una categoria.": true
+				}
+			]
+		},
+		{
+			"id": "02b80ae6-4530-4ff2-a69c-f20222abdb8b",
+			"name": "Get All Categorias 2.0",
+			"url": "http://localhost:4000/categorias",
+			"time": 46,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las categorias.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las categorias.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20,
+				24,
+				46
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				}
+			]
+		},
+		{
+			"id": "ea0bcff1-dbbf-4a75-88b7-077567ffa684",
+			"name": "Get All Categorias by User ID",
+			"url": "http://localhost:4000/usuario/17/categorias",
+			"time": 49,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las categorias.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las categorias.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30,
+				27,
+				49
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				}
+			]
+		},
+		{
+			"id": "a0ffa161-cd1d-4e24-ba5c-bcd3a59c9e35",
+			"name": "Actualizar Categoria",
+			"url": "http://localhost:4000/categorias/5",
+			"time": 65,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error actualizar la información de una categoria identificado con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error actualizar la información de una categoria identificado con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				46,
+				45,
+				65
+			],
+			"allTests": [
+				{
+					"No genera error actualizar la información de una categoria identificado con Id especifico.": true
+				},
+				{
+					"No genera error actualizar la información de una categoria identificado con Id especifico.": true
+				},
+				{
+					"No genera error actualizar la información de una categoria identificado con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "7c6db53c-d3ae-47de-ab1f-d3e434f5f79c",
+			"name": "Get All Categorias 3.0",
+			"url": "http://localhost:4000/categorias",
+			"time": 44,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las categorias.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las categorias.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26,
+				26,
+				44
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				}
+			]
+		},
+		{
+			"id": "1c17ad99-b561-4cb0-8ef8-d9573b617268",
+			"name": "Get a Categoria by ID",
+			"url": "http://localhost:4000/categorias/5",
+			"time": 41,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las categorias.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las categorias.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26,
+				29,
+				41
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				}
+			]
+		},
+		{
+			"id": "2fd37014-413b-4e13-9b4c-d31f487fb6bd",
+			"name": "Eliminar Categoria por ID Copy",
+			"url": "http://localhost:4000/categorias/5",
+			"time": 65,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error eliminar una categoria con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error eliminar una categoria con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				32,
+				38,
+				65
+			],
+			"allTests": [
+				{
+					"No genera error eliminar una categoria con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una categoria con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una categoria con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "bce6adc4-0561-4f00-8ec8-8d5bfc6a3d4b",
+			"name": "Eliminar Usuario por ID Copy",
+			"url": "http://localhost:4000/usuarios/17",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error eliminar un usuario con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error eliminar un usuario con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				48,
+				75,
+				30
+			],
+			"allTests": [
+				{
+					"No genera error eliminar un usuario con Id especifico.": true
+				},
+				{
+					"No genera error eliminar un usuario con Id especifico.": true
+				},
+				{
+					"No genera error eliminar un usuario con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "2e551bb7-2677-4b0f-ab79-e9d756b359d9",
+			"name": "Get All Categorias (Vacio) 4.0",
+			"url": "http://localhost:4000/categorias",
+			"time": 21,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las categorias.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las categorias.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				31,
+				31,
+				21
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				},
+				{
+					"No genera error traer todas las categorias.": true
+				}
+			]
+		}
+	],
+	"count": 3,
+	"totalTime": 3528,
+	"collection": {
+		"requests": [
+			{
+				"id": "680ed037-6d46-4a59-9199-fa23d7eaf3f5",
+				"method": "GET"
+			},
+			{
+				"id": "e330145c-5be8-499c-864d-8625233b7731",
+				"method": "POST"
+			},
+			{
+				"id": "34ac516f-4e74-4eb6-861a-7bd6a60ea9ce",
+				"method": "POST"
+			},
+			{
+				"id": "02859e7f-8bf9-4ce9-a9cb-58c9c87b9e85",
+				"method": "POST"
+			},
+			{
+				"id": "02b80ae6-4530-4ff2-a69c-f20222abdb8b",
+				"method": "GET"
+			},
+			{
+				"id": "ea0bcff1-dbbf-4a75-88b7-077567ffa684",
+				"method": "GET"
+			},
+			{
+				"id": "a0ffa161-cd1d-4e24-ba5c-bcd3a59c9e35",
+				"method": "PUT"
+			},
+			{
+				"id": "7c6db53c-d3ae-47de-ab1f-d3e434f5f79c",
+				"method": "GET"
+			},
+			{
+				"id": "1c17ad99-b561-4cb0-8ef8-d9573b617268",
+				"method": "GET"
+			},
+			{
+				"id": "2fd37014-413b-4e13-9b4c-d31f487fb6bd",
+				"method": "DELETE"
+			},
+			{
+				"id": "bce6adc4-0561-4f00-8ec8-8d5bfc6a3d4b",
+				"method": "DELETE"
+			},
+			{
+				"id": "2e551bb7-2677-4b0f-ab79-e9d756b359d9",
+				"method": "GET"
+			}
+		]
+	}
+}
