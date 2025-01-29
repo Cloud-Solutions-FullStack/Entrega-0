@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import CategoryForm from '../components/Categories/CategoryForm';
 import { getUserCategories } from '../services/categoryService';
+import '../../src/styles/categoria.css';
 
 const CategoryView = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState('');
   const userId = JSON.parse(localStorage.getItem('user')).id;
@@ -11,6 +14,12 @@ const CategoryView = () => {
   useEffect(() => {
     loadCategories();
   }, []);
+
+  useEffect(() => {
+    if (categories.length >= 2) {
+      navigate('/tareas');
+    }
+  }, [categories, navigate]);
 
   const loadCategories = async () => {
     try {
@@ -23,12 +32,19 @@ const CategoryView = () => {
 
   return (
     <Box className="category-view">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" component="h1" gutterBottom>
         Configuración de Categorías
       </Typography>
+      
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+
       {categories.length === 0 ? (
         <>
-          <Alert severity="info">
+          <Alert severity="info" sx={{ mb: 2 }}>
             Debes crear al menos dos categorías para continuar
           </Alert>
           <CategoryForm 
@@ -40,7 +56,7 @@ const CategoryView = () => {
         </>
       ) : categories.length === 1 ? (
         <>
-          <Alert severity="warning">
+          <Alert severity="warning" sx={{ mb: 2 }}>
             Necesitas crear una categoría más
           </Alert>
           <CategoryForm 
@@ -50,9 +66,15 @@ const CategoryView = () => {
             }}
           />
         </>
-      ) : null}
+      ) : (
+        <Box className="loading-view">
+          <Typography variant="h6">
+            Redirigiendo al gestor de tareas...
+          </Typography>
+        </Box>
+      )}
     </Box>
-    );
+  );
 };
 
 export default CategoryView;
