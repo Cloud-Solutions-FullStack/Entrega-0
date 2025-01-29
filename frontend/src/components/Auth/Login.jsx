@@ -38,7 +38,8 @@ const Login = () => {
       });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      console.log("Inicio de sesión exitoso");
+      
+      navigate('/categorias');
     } catch (err) {
       if (err.response?.status === 401) {
         setError('Usuario o contraseña inválidos');
