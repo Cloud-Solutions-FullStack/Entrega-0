@@ -1,0 +1,19 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+}
+
+.app-content {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .app-content {
+    padding: 10px;
+  }
+}

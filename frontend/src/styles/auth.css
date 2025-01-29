@@ -1,0 +1,57 @@
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.auth-subtitle {
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem !important;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.MuiTextField-root {
+  background-color: #fff;
+}
+
+.submit-button {
+  margin-top: 1rem !important;
+  height: 48px;
+  text-transform: none !important;
+  font-size: 1.1rem !important;
+  background: linear-gradient(45deg, #2196f3 30%, #64b5f6 90%);
+  box-shadow: 0 3px 5px 2px rgba(33, 150, 243, 0.3);
+}
+
+.register-button {
+  height: 48px;
+  text-transform: none !important;
+  font-size: 1.1rem !important;
+}
+
+.MuiAlert-root {
+  margin-bottom: 1.5rem;
+  animation: fadeOut 0.5s ease-out forwards;
+  animation-delay: 2.5s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
