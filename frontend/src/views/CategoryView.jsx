@@ -3,7 +3,6 @@ import { Box, Typography, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CategoryForm from '../components/Categories/CategoryForm';
 import { getUserCategories } from '../services/categoryService';
-import '../../src/styles/categoria.css';
 
 const CategoryView = () => {
   const navigate = useNavigate();
@@ -11,22 +10,37 @@ const CategoryView = () => {
   const [error, setError] = useState('');
   const userId = JSON.parse(localStorage.getItem('user')).id;
 
+  const saveCategoriesToStorage = (categories) => {
+    localStorage.setItem('userCategories', JSON.stringify(categories));
+  };
+
   useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const userCategories = await getUserCategories(userId);
+        setCategories(userCategories);
+        if (userCategories.length >= 2) {
+          saveCategoriesToStorage(userCategories);
+        }
+      } catch (err) {
+        setError('Error al cargar las categorías');
+      }
+    };
     loadCategories();
   }, []);
 
   useEffect(() => {
     if (categories.length >= 2) {
+      saveCategoriesToStorage(categories);
       navigate('/tareas');
     }
   }, [categories, navigate]);
 
-  const loadCategories = async () => {
-    try {
-      const userCategories = await getUserCategories(userId);
-      setCategories(userCategories);
-    } catch (err) {
-      setError('Error al cargar las categorías');
+  const handleCategoryCreated = (newCategory) => {
+    const updatedCategories = [...categories, newCategory];
+    setCategories(updatedCategories);
+    if (updatedCategories.length >= 2) {
+      saveCategoriesToStorage(updatedCategories);
     }
   };
 
@@ -49,9 +63,7 @@ const CategoryView = () => {
           </Alert>
           <CategoryForm 
             userId={userId} 
-            onCategoryCreated={(newCategory) => {
-              setCategories([...categories, newCategory]);
-            }}
+            onCategoryCreated={handleCategoryCreated}
           />
         </>
       ) : categories.length === 1 ? (
@@ -61,9 +73,7 @@ const CategoryView = () => {
           </Alert>
           <CategoryForm 
             userId={userId}
-            onCategoryCreated={(newCategory) => {
-              setCategories([...categories, newCategory]);
-            }}
+            onCategoryCreated={handleCategoryCreated}
           />
         </>
       ) : (

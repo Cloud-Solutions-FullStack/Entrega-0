@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, MenuItem, Box } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
@@ -9,8 +9,9 @@ const TASK_STATES = {
   TERMINADA: 'FINALIZADA'
 };
 
-const TaskForm = ({ categories, onSubmit }) => {
+const TaskForm = ({ onSubmit }) => {
   const userId = JSON.parse(localStorage.getItem('user')).id;
+  const storedCategories = JSON.parse(localStorage.getItem('userCategories') || '[]');
   
   const [task, setTask] = useState({
     texto_tarea: '',
@@ -29,12 +30,11 @@ const TaskForm = ({ categories, onSubmit }) => {
     onSubmit({
       texto_tarea: task.texto_tarea,
       fecha_tentativa_finalizacion: dayjs(task.fecha_tentativa_finalizacion).format('YYYY-MM-DD'),
-      estado: task.estado.toUpperCase(),
+      estado: task.estado,
       user_id: task.user_id,
-      category_id: task.category_id
+      category_id: parseInt(task.category_id)
     });
     
-    // Reset form
     setTask({
       texto_tarea: '',
       fecha_tentativa_finalizacion: null,
@@ -65,7 +65,7 @@ const TaskForm = ({ categories, onSubmit }) => {
         required
         sx={{ mb: 2 }}
       >
-        {categories.map((category) => (
+        {storedCategories.map((category) => (
           <MenuItem key={category.id} value={category.id}>
             {category.nombre}
           </MenuItem>
