@@ -4,3 +4,4 @@ Flask-SQLAlchemy
 Flask-CORS
 marshmallow
 werkzeug
+flask_jwt_extended

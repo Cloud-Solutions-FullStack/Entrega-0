@@ -1,0 +1,763 @@
+{
+	"id": "57476670-c95e-464b-980d-0ce10c1c2f4e",
+	"name": "Entrega-0 Server test",
+	"timestamp": "2025-01-29T16:19:45.179Z",
+	"collection_id": "12650312-6a08f88d-66d3-4848-bdd0-f58586152709",
+	"folder_id": "12650312-8a432590-f7dd-4876-a2fc-278320b85d4b",
+	"environment_id": "0",
+	"totalPass": 57,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-01-29T16:19:35.286Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "ac9b6c06-036e-4c5f-b178-b501eaf7668e",
+			"name": "Get All Tareas (Vacio)",
+			"url": "http://localhost:4000/tareas",
+			"time": 44,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las tareas sin importar el usuario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las tareas sin importar el usuario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22,
+				32,
+				44
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				}
+			]
+		},
+		{
+			"id": "59595920-6761-4873-b65d-2e7270f47d36",
+			"name": "Crear Usuario",
+			"url": "http://localhost:4000/usuarios",
+			"time": 543,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"No genera error crearr un usuario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error crearr un usuario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				589,
+				460,
+				543
+			],
+			"allTests": [
+				{
+					"No genera error crearr un usuario.": true
+				},
+				{
+					"No genera error crearr un usuario.": true
+				},
+				{
+					"No genera error crearr un usuario.": true
+				}
+			]
+		},
+		{
+			"id": "ad8c86bf-3549-4cba-8a44-6a4e7d2dbdc8",
+			"name": "Log In Usuario Copy",
+			"url": "http://localhost:4000/usuarios/login",
+			"time": 499,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error buscar al usario y ver que su contrseña es correcta.": true
+			},
+			"testPassFailCounts": {
+				"No genera error buscar al usario y ver que su contrseña es correcta.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				631,
+				521,
+				499
+			],
+			"allTests": [
+				{
+					"No genera error buscar al usario y ver que su contrseña es correcta.": true
+				},
+				{
+					"No genera error buscar al usario y ver que su contrseña es correcta.": true
+				},
+				{
+					"No genera error buscar al usario y ver que su contrseña es correcta.": true
+				}
+			]
+		},
+		{
+			"id": "7ea46f26-02a1-4897-8171-ec08ff33cb1d",
+			"name": "Crear Categoria",
+			"url": "http://localhost:4000/categorias",
+			"time": 62,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"No genera error crear una categoria.": true
+			},
+			"testPassFailCounts": {
+				"No genera error crear una categoria.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36,
+				47,
+				62
+			],
+			"allTests": [
+				{
+					"No genera error crear una categoria.": true
+				},
+				{
+					"No genera error crear una categoria.": true
+				},
+				{
+					"No genera error crear una categoria.": true
+				}
+			]
+		},
+		{
+			"id": "43f6a1cc-6219-472b-a7d5-5f6e50cff733",
+			"name": "Crear Tarea",
+			"url": "http://localhost:4000/tareas",
+			"time": 73,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"No genera error crear una tarea para un usario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error crear una tarea para un usario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				83,
+				39,
+				73
+			],
+			"allTests": [
+				{
+					"No genera error crear una tarea para un usario.": true
+				},
+				{
+					"No genera error crear una tarea para un usario.": true
+				},
+				{
+					"No genera error crear una tarea para un usario.": true
+				}
+			]
+		},
+		{
+			"id": "f28e7306-7aae-4192-bc3d-a0a620a4f6e2",
+			"name": "Crear Tarea 2.0",
+			"url": "http://localhost:4000/tareas",
+			"time": 52,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Genera error crear una tarea donde la fecha de finalización sea inferior a hoy.": true
+			},
+			"testPassFailCounts": {
+				"Genera error crear una tarea donde la fecha de finalización sea inferior a hoy.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26,
+				22,
+				52
+			],
+			"allTests": [
+				{
+					"Genera error crear una tarea donde la fecha de finalización sea inferior a hoy.": true
+				},
+				{
+					"Genera error crear una tarea donde la fecha de finalización sea inferior a hoy.": true
+				},
+				{
+					"Genera error crear una tarea donde la fecha de finalización sea inferior a hoy.": true
+				}
+			]
+		},
+		{
+			"id": "7a8d8a7b-3c93-404d-9062-6826c2052224",
+			"name": "Crear Tarea 3.0",
+			"url": "http://localhost:4000/tareas",
+			"time": 64,
+			"responseCode": {
+				"code": 404,
+				"name": "NOT FOUND"
+			},
+			"tests": {
+				"Genera error crear una tarea donde el usuario no existe.": true
+			},
+			"testPassFailCounts": {
+				"Genera error crear una tarea donde el usuario no existe.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				29,
+				27,
+				64
+			],
+			"allTests": [
+				{
+					"Genera error crear una tarea donde el usuario no existe.": true
+				},
+				{
+					"Genera error crear una tarea donde el usuario no existe.": true
+				},
+				{
+					"Genera error crear una tarea donde el usuario no existe.": true
+				}
+			]
+		},
+		{
+			"id": "c837f8b9-310b-4dfb-8cb6-b27f018bd799",
+			"name": "Crear Tarea 4.0",
+			"url": "http://localhost:4000/tareas",
+			"time": 30,
+			"responseCode": {
+				"code": 404,
+				"name": "NOT FOUND"
+			},
+			"tests": {
+				"Genera error crear una tarea donde el usuario no existe.": true
+			},
+			"testPassFailCounts": {
+				"Genera error crear una tarea donde el usuario no existe.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22,
+				21,
+				30
+			],
+			"allTests": [
+				{
+					"Genera error crear una tarea donde el usuario no existe.": true
+				},
+				{
+					"Genera error crear una tarea donde el usuario no existe.": true
+				},
+				{
+					"Genera error crear una tarea donde el usuario no existe.": true
+				}
+			]
+		},
+		{
+			"id": "6869fdca-4ae8-4896-989d-6e62c51b73d6",
+			"name": "Crear Tarea 5.0",
+			"url": "http://localhost:4000/tareas",
+			"time": 48,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"No genera error crear una tarea para un usario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error crear una tarea para un usario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				44,
+				27,
+				48
+			],
+			"allTests": [
+				{
+					"No genera error crear una tarea para un usario.": true
+				},
+				{
+					"No genera error crear una tarea para un usario.": true
+				},
+				{
+					"No genera error crear una tarea para un usario.": true
+				}
+			]
+		},
+		{
+			"id": "95d4b8cd-21da-4fb2-a04c-f79c50a44364",
+			"name": "Get All Tareas 2.0",
+			"url": "http://localhost:4000/tareas",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las tareas sin importar el usuario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las tareas sin importar el usuario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17,
+				47,
+				24
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				}
+			]
+		},
+		{
+			"id": "b9efc99c-9fb6-4dc3-b2dc-8d6cddc1821c",
+			"name": "Get Tarea by ID",
+			"url": "http://localhost:4000/tareas/8",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas una tarea especifica con ID.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas una tarea especifica con ID.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16,
+				43,
+				24
+			],
+			"allTests": [
+				{
+					"No genera error traer todas una tarea especifica con ID.": true
+				},
+				{
+					"No genera error traer todas una tarea especifica con ID.": true
+				},
+				{
+					"No genera error traer todas una tarea especifica con ID.": true
+				}
+			]
+		},
+		{
+			"id": "4f4d13aa-090b-45f1-9e19-5a2e973838c7",
+			"name": "Get Tareas by User ID",
+			"url": "http://localhost:4000/usuario/20/tareas",
+			"time": 48,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las tareas de un usuario con id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las tareas de un usuario con id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18,
+				46,
+				48
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las tareas de un usuario con id especifico.": true
+				},
+				{
+					"No genera error traer todas las tareas de un usuario con id especifico.": true
+				},
+				{
+					"No genera error traer todas las tareas de un usuario con id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "69855efe-f972-4a8a-8031-a615d845f194",
+			"name": "Actualizar Tarea",
+			"url": "http://localhost:4000/tareas/8",
+			"time": 66,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error actualizar la información de una tarea identificada con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error actualizar la información de una tarea identificada con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30,
+				71,
+				66
+			],
+			"allTests": [
+				{
+					"No genera error actualizar la información de una tarea identificada con Id especifico.": true
+				},
+				{
+					"No genera error actualizar la información de una tarea identificada con Id especifico.": true
+				},
+				{
+					"No genera error actualizar la información de una tarea identificada con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "cd84d99c-cc96-446f-9c6a-15a32681bdf7",
+			"name": "Get All Tareas 3.0",
+			"url": "http://localhost:4000/tareas",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las tareas sin importar el usuario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las tareas sin importar el usuario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				43,
+				42,
+				27
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				}
+			]
+		},
+		{
+			"id": "c5d6044b-ee13-4906-b7de-864b3b9bbf24",
+			"name": "Eliminar Tarea",
+			"url": "http://localhost:4000/tareas/7",
+			"time": 59,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error eliminar una tarea con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error eliminar una tarea con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				62,
+				57,
+				59
+			],
+			"allTests": [
+				{
+					"No genera error eliminar una tarea con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una tarea con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una tarea con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "acafb6c2-9b94-4f0b-a96a-31a941f64959",
+			"name": "Eliminar Tarea 2.0",
+			"url": "http://localhost:4000/tareas/8",
+			"time": 69,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error eliminar una tarea con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error eliminar una tarea con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				62,
+				33,
+				69
+			],
+			"allTests": [
+				{
+					"No genera error eliminar una tarea con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una tarea con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una tarea con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "cb1b725d-d5cf-4c46-9b2b-d2589e211500",
+			"name": "Eliminar Categoria por ID",
+			"url": "http://localhost:4000/categorias/8",
+			"time": 56,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error eliminar una categoria con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error eliminar una categoria con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				53,
+				30,
+				56
+			],
+			"allTests": [
+				{
+					"No genera error eliminar una categoria con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una categoria con Id especifico.": true
+				},
+				{
+					"No genera error eliminar una categoria con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "51bc261a-b7a6-4dfd-81c9-ec393d8dc50e",
+			"name": "Eliminar Usuario por ID",
+			"url": "http://localhost:4000/usuarios/20",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error eliminar un usuario con Id especifico.": true
+			},
+			"testPassFailCounts": {
+				"No genera error eliminar un usuario con Id especifico.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				52,
+				43,
+				30
+			],
+			"allTests": [
+				{
+					"No genera error eliminar un usuario con Id especifico.": true
+				},
+				{
+					"No genera error eliminar un usuario con Id especifico.": true
+				},
+				{
+					"No genera error eliminar un usuario con Id especifico.": true
+				}
+			]
+		},
+		{
+			"id": "5f00e224-e2ac-4441-9175-c790ddf7985a",
+			"name": "Get All Tareas (Vacio) 4.0",
+			"url": "http://localhost:4000/tareas",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"No genera error traer todas las tareas sin importar el usuario.": true
+			},
+			"testPassFailCounts": {
+				"No genera error traer todas las tareas sin importar el usuario.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25,
+				39,
+				27
+			],
+			"allTests": [
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				},
+				{
+					"No genera error traer todas las tareas sin importar el usuario.": true
+				}
+			]
+		}
+	],
+	"count": 3,
+	"totalTime": 5352,
+	"collection": {
+		"requests": [
+			{
+				"id": "ac9b6c06-036e-4c5f-b178-b501eaf7668e",
+				"method": "GET"
+			},
+			{
+				"id": "59595920-6761-4873-b65d-2e7270f47d36",
+				"method": "POST"
+			},
+			{
+				"id": "ad8c86bf-3549-4cba-8a44-6a4e7d2dbdc8",
+				"method": "POST"
+			},
+			{
+				"id": "7ea46f26-02a1-4897-8171-ec08ff33cb1d",
+				"method": "POST"
+			},
+			{
+				"id": "43f6a1cc-6219-472b-a7d5-5f6e50cff733",
+				"method": "POST"
+			},
+			{
+				"id": "f28e7306-7aae-4192-bc3d-a0a620a4f6e2",
+				"method": "POST"
+			},
+			{
+				"id": "7a8d8a7b-3c93-404d-9062-6826c2052224",
+				"method": "POST"
+			},
+			{
+				"id": "c837f8b9-310b-4dfb-8cb6-b27f018bd799",
+				"method": "POST"
+			},
+			{
+				"id": "6869fdca-4ae8-4896-989d-6e62c51b73d6",
+				"method": "POST"
+			},
+			{
+				"id": "95d4b8cd-21da-4fb2-a04c-f79c50a44364",
+				"method": "GET"
+			},
+			{
+				"id": "b9efc99c-9fb6-4dc3-b2dc-8d6cddc1821c",
+				"method": "GET"
+			},
+			{
+				"id": "4f4d13aa-090b-45f1-9e19-5a2e973838c7",
+				"method": "GET"
+			},
+			{
+				"id": "69855efe-f972-4a8a-8031-a615d845f194",
+				"method": "PUT"
+			},
+			{
+				"id": "cd84d99c-cc96-446f-9c6a-15a32681bdf7",
+				"method": "GET"
+			},
+			{
+				"id": "c5d6044b-ee13-4906-b7de-864b3b9bbf24",
+				"method": "DELETE"
+			},
+			{
+				"id": "acafb6c2-9b94-4f0b-a96a-31a941f64959",
+				"method": "DELETE"
+			},
+			{
+				"id": "cb1b725d-d5cf-4c46-9b2b-d2589e211500",
+				"method": "DELETE"
+			},
+			{
+				"id": "51bc261a-b7a6-4dfd-81c9-ec393d8dc50e",
+				"method": "DELETE"
+			},
+			{
+				"id": "5f00e224-e2ac-4441-9175-c790ddf7985a",
+				"method": "GET"
+			}
+		]
+	}
+}
