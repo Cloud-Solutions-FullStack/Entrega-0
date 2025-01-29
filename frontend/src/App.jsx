@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
-import CategoryView from './views/CategoryView';
-import TaskView from './views/TaskView';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import CategoryView from "./views/CategoryView";
+import TaskView from "./views/TaskView";
 
 const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   return token ? children : <Navigate to="/login" />;
 };
 
@@ -15,16 +15,22 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/categorias" element={
-          <PrivateRoute>
-            <CategoryView />
-          </PrivateRoute>
-        } />
-        <Route path="/tareas" element={
-          <PrivateRoute>
-            <TaskView />
-          </PrivateRoute>
-        } />
+        <Route
+          path="/categorias"
+          element={
+            <PrivateRoute>
+              <CategoryView />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tareas"
+          element={
+            <PrivateRoute>
+              <TaskView />
+            </PrivateRoute>
+          }
+        />
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>

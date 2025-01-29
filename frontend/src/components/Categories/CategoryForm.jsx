@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { TextField, Button, Box, Typography, Alert } from '@mui/material';
-import { createCategory } from '../../services/categoryService';
-import '../../styles/categoria.css';
+import React, { useState } from "react";
+import { TextField, Button, Box, Typography, Alert } from "@mui/material";
+import { createCategory } from "../../services/categoryService";
+import "../../styles/categoria.css";
 
 const CategoryForm = ({ userId, onCategoryCreated }) => {
   const [formData, setFormData] = useState({
-    nombre: '',
-    descripcion: ''
+    nombre: "",
+    descripcion: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const newCategory = await createCategory({
         ...formData,
-        user_id: userId
+        user_id: userId,
       });
       onCategoryCreated(newCategory);
-      setFormData({ nombre: '', descripcion: '' });
+      setFormData({ nombre: "", descripcion: "" });
     } catch (err) {
-      setError(err.response?.data?.error || 'Error al crear la categoría');
+      setError(err.response?.data?.error || "Error al crear la categoría");
     }
   };
 
@@ -33,7 +33,7 @@ const CategoryForm = ({ userId, onCategoryCreated }) => {
           name="nombre"
           label="Nombre"
           value={formData.nombre}
-          onChange={(e) => setFormData({...formData, nombre: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
           required
           fullWidth
           margin="normal"
@@ -42,13 +42,15 @@ const CategoryForm = ({ userId, onCategoryCreated }) => {
           name="descripcion"
           label="Descripción"
           value={formData.descripcion}
-          onChange={(e) => setFormData({...formData, descripcion: e.target.value})}
+          onChange={(e) =>
+            setFormData({ ...formData, descripcion: e.target.value })
+          }
           fullWidth
           margin="normal"
           multiline
           rows={3}
         />
-        <Button 
+        <Button
           type="submit"
           variant="contained"
           fullWidth

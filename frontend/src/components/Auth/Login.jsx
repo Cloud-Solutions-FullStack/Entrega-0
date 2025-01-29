@@ -1,22 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { TextField, Button, Box, Typography, Alert, Stack } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import api from '../../services/api';
-import '../../styles/Auth.css';
+import React, { useState, useEffect } from "react";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Alert,
+  Stack,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
+import "../../styles/Auth.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
-    usuario: '',
-    contraseña: ''
+    usuario: "",
+    contraseña: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
-        setError('');
+        setError("");
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -25,28 +32,28 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/usuarios/login', {
+      const response = await api.post("/usuarios/login", {
         nombre_usuario: formData.usuario,
-        contrasenia: formData.contraseña
+        contrasenia: formData.contraseña,
       });
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      
-      navigate('/categorias');
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      navigate("/categorias");
     } catch (err) {
       if (err.response?.status === 401) {
-        setError('Usuario o contraseña inválidos');
+        setError("Usuario o contraseña inválidos");
       } else if (err.response?.data?.error) {
         setError(err.response.data.error);
       } else {
-        setError('Error al intentar iniciar sesión');
+        setError("Error al intentar iniciar sesión");
       }
     }
   };
@@ -81,7 +88,7 @@ const Login = () => {
           required
         />
         <Stack spacing={2}>
-          <Button 
+          <Button
             type="submit"
             variant="contained"
             fullWidth
@@ -95,7 +102,7 @@ const Login = () => {
             fullWidth
             size="large"
             className="register-button"
-            onClick={() => navigate('/register')}
+            onClick={() => navigate("/register")}
           >
             Crear Usuario
           </Button>

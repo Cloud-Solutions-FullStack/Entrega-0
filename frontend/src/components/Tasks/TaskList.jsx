@@ -1,47 +1,51 @@
-import React from 'react';
-import { 
-  Box, 
-  Card, 
-  CardContent, 
-  Typography, 
-  IconButton, 
-  Chip, 
-  Select, 
-  MenuItem 
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React from "react";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+  Chip,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const TASK_STATES = {
-  PENDIENTE: 'Pendiente',
-  EN_PROGRESO: 'En Progreso',
-  TERMINADA: 'Terminada'
+  PENDIENTE: "Pendiente",
+  EN_PROGRESO: "En Progreso",
+  FINALIZADA: "Finalizada",
 };
 
 const mapBackendToFrontendState = (backendState) => {
   const stateMap = {
-    'PENDIENTE': 'Pendiente',
-    'EN_PROGRESO': 'En Progreso',
-    'TERMINADA': 'Terminada'
+    PENDIENTE: "Pendiente",
+    EN_PROGRESO: "En Progreso",
+    FINALIZADA: "Finalizada",
   };
-  return stateMap[backendState] || 'Pendiente';
+  return stateMap[backendState] || "Pendiente";
 };
 
 const mapFrontendToBackendState = (frontendState) => {
   const stateMap = {
-    'Pendiente': 'PENDIENTE',
-    'En Progreso': 'EN_PROGRESO',
-    'Terminada': 'TERMINADA'
+    Pendiente: "PENDIENTE",
+    "En Progreso": "EN_PROGRESO",
+    Finalizada: "FINALIZADA",
   };
   return stateMap[frontendState];
 };
 
 const TaskList = ({ tasks, onStatusChange, onDelete }) => {
   const getStatusColor = (status) => {
-    switch(status) {
-      case 'Pendiente': return 'warning';
-      case 'En Progreso': return 'info';
-      case 'Terminada': return 'success';
-      default: return 'default';
+    switch (status) {
+      case "Pendiente":
+        return "warning";
+      case "En Progreso":
+        return "info";
+      case "Finalizada":
+        return "success";
+      default:
+        return "default";
     }
   };
 
@@ -49,24 +53,34 @@ const TaskList = ({ tasks, onStatusChange, onDelete }) => {
     <Box>
       {tasks.map((task) => (
         <Card key={task.id} sx={{ mb: 2 }}>
-          <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <CardContent
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
             <Box>
               <Typography variant="h6">{task.texto_tarea}</Typography>
               <Typography color="textSecondary">
-                Fecha límite: {new Date(task.fecha_tentativa_finalizacion).toLocaleDateString()}
+                Fecha límite:{" "}
+                {new Date(
+                  task.fecha_tentativa_finalizacion
+                ).toLocaleDateString()}
               </Typography>
             </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <Select
                 value={mapBackendToFrontendState(task.estado)}
-                onChange={(e) => onStatusChange(task.id, mapFrontendToBackendState(e.target.value))}
+                onChange={(e) =>
+                  onStatusChange(
+                    task.id,
+                    mapFrontendToBackendState(e.target.value)
+                  )
+                }
                 size="small"
               >
                 {Object.values(TASK_STATES).map((status) => (
                   <MenuItem key={status} value={status}>
-                    <Chip 
-                      label={status} 
-                      size="small" 
+                    <Chip
+                      label={status}
+                      size="small"
                       color={getStatusColor(status)}
                     />
                   </MenuItem>

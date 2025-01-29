@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Alert } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import CategoryForm from '../components/Categories/CategoryForm';
-import { getUserCategories } from '../services/categoryService';
+import React, { useState, useEffect } from "react";
+import { Box, Typography, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import CategoryForm from "../components/Categories/CategoryForm";
+import { getUserCategories } from "../services/categoryService";
 
 const CategoryView = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const [error, setError] = useState('');
-  const userId = JSON.parse(localStorage.getItem('user')).id;
+  const [error, setError] = useState("");
+  const userId = JSON.parse(localStorage.getItem("user")).id;
 
   const saveCategoriesToStorage = (categories) => {
-    localStorage.setItem('userCategories', JSON.stringify(categories));
+    localStorage.setItem("userCategories", JSON.stringify(categories));
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const CategoryView = () => {
           saveCategoriesToStorage(userCategories);
         }
       } catch (err) {
-        setError('Error al cargar las categorías');
+        setError("Error al cargar las categorías");
       }
     };
     loadCategories();
@@ -32,7 +32,7 @@ const CategoryView = () => {
   useEffect(() => {
     if (categories.length >= 2) {
       saveCategoriesToStorage(categories);
-      navigate('/tareas');
+      navigate("/tareas");
     }
   }, [categories, navigate]);
 
@@ -49,7 +49,7 @@ const CategoryView = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         Configuración de Categorías
       </Typography>
-      
+
       {error && (
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
@@ -61,8 +61,8 @@ const CategoryView = () => {
           <Alert severity="info" sx={{ mb: 2 }}>
             Debes crear al menos dos categorías para continuar
           </Alert>
-          <CategoryForm 
-            userId={userId} 
+          <CategoryForm
+            userId={userId}
             onCategoryCreated={handleCategoryCreated}
           />
         </>
@@ -71,7 +71,7 @@ const CategoryView = () => {
           <Alert severity="warning" sx={{ mb: 2 }}>
             Necesitas crear una categoría más
           </Alert>
-          <CategoryForm 
+          <CategoryForm
             userId={userId}
             onCategoryCreated={handleCategoryCreated}
           />
