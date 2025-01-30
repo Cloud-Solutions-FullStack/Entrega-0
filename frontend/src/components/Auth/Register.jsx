@@ -5,6 +5,7 @@ import {
   Box,
   Typography,
   Alert,
+  Paper,
   Stack,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,13 @@ const Register = () => {
   });
   const [error, setError] = useState("");
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.contrasenia !== formData.confirmar_contrasenia) {
@@ -29,92 +37,141 @@ const Register = () => {
       return;
     }
 
-    if (formData.contrasenia.length < 8) {
-      setError("La contraseña debe tener al menos 8 caracteres");
-      return;
-    }
+    // Set default profile image if empty
+    const imagen_perfil =
+      formData.imagen_perfil ||
+      "https://i.pinimg.com/736x/d4/3c/22/d43c22f0698b776391f59313e7b22a73.jpg";
 
     try {
       await api.post("/usuarios", {
         nombre_usuario: formData.nombre_usuario,
         contrasenia: formData.contrasenia,
-        imagen_perfil: formData.imagen_perfil || null,
+        imagen_perfil: imagen_perfil,
       });
-      showToast("Usuario creado exitosamente");
+      showToast("Usuario creado exitosamente", "success");
       navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.error || "Error al crear usuario");
+      setError(err.response?.data?.error || "Error al crear el usuario");
     }
   };
 
   return (
     <Box className="auth-container">
-      <Typography variant="h4" gutterBottom>
-        Crear Usuario
-      </Typography>
-      {error && <Alert severity="error">{error}</Alert>}
-      <form onSubmit={handleSubmit} className="auth-form">
-        <TextField
-          name="nombre_usuario"
-          label="Usuario"
-          value={formData.nombre_usuario}
-          onChange={(e) =>
-            setFormData({ ...formData, nombre_usuario: e.target.value })
-          }
-          required
-          fullWidth
-        />
-        <TextField
-          name="contrasenia"
-          label="Contraseña"
-          type="password"
-          value={formData.contrasenia}
-          onChange={(e) =>
-            setFormData({ ...formData, contrasenia: e.target.value })
-          }
-          required
-          fullWidth
-          helperText="Mínimo 8 caracteres"
-        />
-        <TextField
-          name="confirmar_contrasenia"
-          label="Confirmar Contraseña"
-          type="password"
-          value={formData.confirmar_contrasenia}
-          onChange={(e) =>
-            setFormData({ ...formData, confirmar_contrasenia: e.target.value })
-          }
-          required
-          fullWidth
-        />
-        <TextField
-          name="imagen_perfil"
-          label="URL Imagen de Perfil (Opcional)"
-          value={formData.imagen_perfil}
-          onChange={(e) =>
-            setFormData({ ...formData, imagen_perfil: e.target.value })
-          }
-          fullWidth
-        />
-        <Stack spacing={2} sx={{ mt: 2 }}>
-          <Button
-            type="submit"
-            variant="contained"
+      <Paper className="auth-card" elevation={0}>
+        <Typography
+          variant="h1"
+          className="title"
+          sx={{
+            fontSize: "clamp(2rem, 6vw, 3.5rem)",
+            fontWeight: 800,
+            color: "#2c3e50",
+            mb: 2,
+            textAlign: "center",
+          }}
+        >
+          TaskHub
+        </Typography>
+        <Typography
+          variant="h4"
+          className="subtitle"
+          sx={{
+            fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+            color: "#34495e",
+            mb: 4,
+            textAlign: "center",
+          }}
+        >
+          Crea tu cuenta
+        </Typography>
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 2, width: "100%" }}>
+            {error}
+          </Alert>
+        )}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <TextField
+            name="nombre_usuario"
+            label="Nombre de Usuario"
+            value={formData.nombre_usuario}
+            onChange={handleChange}
             fullWidth
-            className="submit-button"
-          >
-            Crear Usuario
-          </Button>
-          <Button
-            variant="outlined"
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            name="contrasenia"
+            label="Contraseña"
+            type="password"
+            value={formData.contrasenia}
+            onChange={handleChange}
             fullWidth
-            className="back-button"
-            onClick={() => navigate("/login")}
-          >
-            Volver al Login
-          </Button>
-        </Stack>
-      </form>
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            name="confirmar_contrasenia"
+            label="Confirmar Contraseña"
+            type="password"
+            value={formData.confirmar_contrasenia}
+            onChange={handleChange}
+            fullWidth
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            name="imagen_perfil"
+            label="URL Imagen de Perfil (Opcional)"
+            value={formData.imagen_perfil}
+            onChange={handleChange}
+            fullWidth
+            sx={{ mb: 2 }}
+            placeholder="https://..."
+            helperText="Deja en blanco para usar imagen por defecto"
+          />
+          <Stack spacing={1}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                bgcolor: "#2B7781",
+                fontSize: "1.1rem",
+                py: 1.5,
+                borderRadius: "50px",
+                "&:hover": {
+                  bgcolor: "#2B7781",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 6px 20px rgba(43, 119, 129, 0.4)",
+                },
+              }}
+            >
+              Registrarse
+            </Button>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => navigate("/login")}
+              sx={{
+                color: "#2B7781",
+                borderColor: "#2B7781",
+                fontSize: "1.1rem",
+                py: 1.5,
+                borderRadius: "50px",
+                "&:hover": {
+                  borderColor: "#2980b9",
+                  bgcolor: "rgba(52, 152, 219, 0.1)",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 6px 20px rgba(43, 119, 129, 0.4)",
+                },
+              }}
+            >
+              Volver al Login
+            </Button>
+          </Stack>
+        </form>
+      </Paper>
     </Box>
   );
 };

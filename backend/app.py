@@ -123,7 +123,7 @@ class Category(db.Model):
   __tablename__ = 'categoria'
   # Define the columns of the table: id, nombre y descripción.
   id = db.Column(db.Integer, primary_key=True)
-  nombre = db.Column(db.String(80), unique=True, nullable=False)
+  nombre = db.Column(db.String(80), unique=False, nullable=False)
   descripcion = db.Column(db.String(250), unique=False, nullable=True)
   user_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
 

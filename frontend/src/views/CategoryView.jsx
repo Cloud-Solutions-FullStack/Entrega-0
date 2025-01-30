@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CategoryForm from "../components/Categories/CategoryForm";
 import { getUserCategories } from "../services/categoryService";
+import "../styles/categoria.css";
 
 const CategoryView = () => {
   const navigate = useNavigate();
@@ -46,36 +47,20 @@ const CategoryView = () => {
 
   return (
     <Box className="category-view">
-      <Typography variant="h4" component="h1" gutterBottom>
-        Configuración de Categorías
-      </Typography>
-
-      {error && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      )}
-
       {categories.length === 0 ? (
-        <>
-          <Alert severity="info" sx={{ mb: 2 }}>
-            Debes crear al menos dos categorías para continuar
-          </Alert>
-          <CategoryForm
-            userId={userId}
-            onCategoryCreated={handleCategoryCreated}
-          />
-        </>
+        <CategoryForm
+          userId={userId}
+          onCategoryCreated={handleCategoryCreated}
+          alertType="info"
+          alertMessage="Debes crear al menos dos categorías para continuar"
+        />
       ) : categories.length === 1 ? (
-        <>
-          <Alert severity="warning" sx={{ mb: 2 }}>
-            Necesitas crear una categoría más
-          </Alert>
-          <CategoryForm
-            userId={userId}
-            onCategoryCreated={handleCategoryCreated}
-          />
-        </>
+        <CategoryForm
+          userId={userId}
+          onCategoryCreated={handleCategoryCreated}
+          alertType="warning"
+          alertMessage="Necesitas crear una categoría más"
+        />
       ) : (
         <Box className="loading-view">
           <Typography variant="h6">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Alert } from "@mui/material";
+import { Container, Typography, Alert, Grid, Box } from "@mui/material";
 import TaskForm from "../components/Tasks/TaskForm";
 import TaskList from "../components/Tasks/TaskList";
 import {
@@ -30,7 +30,6 @@ const TaskView = () => {
   };
 
   useEffect(() => {
-    // Try to load from localStorage first
     const cachedTasks = localStorage.getItem("userTasks");
     if (cachedTasks) {
       setTasks(JSON.parse(cachedTasks));
@@ -64,20 +63,16 @@ const TaskView = () => {
         category_id: currentTask.category_id,
       };
 
-      // Send complete task data
       await updateTask(taskId, updatedTaskData);
 
-      // Update local state
       const updatedTasks = tasks.map((task) =>
         task.id === taskId ? { ...task, estado: newStatus } : task
       );
       setTasks(updatedTasks);
       localStorage.setItem("userTasks", JSON.stringify(updatedTasks));
-      setError("");
     } catch (err) {
       console.error("Error updating task:", err);
       setError("Error al actualizar el estado");
-      // Restore from cache if update fails
       const cachedTasks = localStorage.getItem("userTasks");
       if (cachedTasks) {
         setTasks(JSON.parse(cachedTasks));
@@ -101,22 +96,39 @@ const TaskView = () => {
   }
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography variant="h4" gutterBottom>
         Gestión de Tareas
       </Typography>
       {error && (
-        <Alert severity="error" sx={{ mb: 2 }}>
+        <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError("")}>
           {error}
         </Alert>
       )}
       <TaskForm onSubmit={handleCreateTask} />
-      <TaskList
-        tasks={tasks}
-        categories={categories}
-        onStatusChange={handleStatusChange}
-        onDelete={handleDelete}
-      />
+      <Grid container spacing={3}>
+        {categories.map((category) => (
+          <Grid item xs={12} md={6} key={category.id}>
+            <Box
+              sx={{
+                p: 2,
+                bgcolor: "background.paper",
+                borderRadius: 1,
+                boxShadow: 1,
+              }}
+            >
+              <Typography variant="h6" gutterBottom>
+                {category.nombre}
+              </Typography>
+              <TaskList
+                tasks={tasks.filter((task) => task.category_id === category.id)}
+                onStatusChange={handleStatusChange}
+                onDelete={handleDelete}
+              />
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 };

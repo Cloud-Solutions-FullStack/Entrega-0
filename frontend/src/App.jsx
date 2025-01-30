@@ -3,6 +3,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import CategoryView from "./views/CategoryView";
 import TaskView from "./views/TaskView";
+import HomePage from "./views/HomePage";
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -13,6 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route
@@ -31,7 +33,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   );

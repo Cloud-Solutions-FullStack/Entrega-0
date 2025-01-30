@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  TextField,
-  Button,
   Box,
+  Button,
+  TextField,
   Typography,
   Alert,
+  Paper,
   Stack,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import "../../styles/Auth.css";
+import "../../styles/auth.css";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     usuario: "",
     contraseña: "",
   });
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => {
-        setError("");
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
 
   const handleChange = (e) => {
     setFormData({
@@ -45,7 +36,6 @@ const Login = () => {
       });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-
       navigate("/categorias");
     } catch (err) {
       if (err.response?.status === 401) {
@@ -60,54 +50,103 @@ const Login = () => {
 
   return (
     <Box className="auth-container">
-      <Typography variant="h4" component="h1" gutterBottom>
-        Gestión de Tareas
-      </Typography>
-      <Typography variant="subtitle1" gutterBottom className="auth-subtitle">
-        Inicia sesión para continuar
-      </Typography>
-      {error && <Alert severity="error">{error}</Alert>}
-      <form onSubmit={handleSubmit} className="auth-form">
-        <TextField
-          name="usuario"
-          label="Usuario"
-          variant="outlined"
-          value={formData.usuario}
-          onChange={handleChange}
-          fullWidth
-          required
-        />
-        <TextField
-          name="contraseña"
-          label="Contraseña"
-          type="password"
-          variant="outlined"
-          value={formData.contraseña}
-          onChange={handleChange}
-          fullWidth
-          required
-        />
-        <Stack spacing={2}>
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            size="large"
-            className="submit-button"
-          >
-            Ingresar
-          </Button>
-          <Button
+      <Paper className="auth-card" elevation={0}>
+        <Typography
+          variant="h1"
+          className="title"
+          sx={{
+            fontSize: "clamp(2rem, 6vw, 3.5rem)",
+            fontWeight: 800,
+            color: "#2c3e50",
+            mb: 2,
+            textAlign: "center",
+          }}
+        >
+          TaskHub
+        </Typography>
+        <Typography
+          variant="h4"
+          className="subtitle"
+          sx={{
+            fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+            color: "#34495e",
+            mb: 4,
+            textAlign: "center",
+          }}
+        >
+          Inicia sesión para continuar
+        </Typography>
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 2, width: "100%" }}>
+            {error}
+          </Alert>
+        )}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <TextField
+            name="usuario"
+            label="Usuario"
             variant="outlined"
+            value={formData.usuario}
+            onChange={handleChange}
             fullWidth
-            size="large"
-            className="register-button"
-            onClick={() => navigate("/register")}
-          >
-            Crear Usuario
-          </Button>
-        </Stack>
-      </form>
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            name="contraseña"
+            label="Contraseña"
+            type="password"
+            variant="outlined"
+            value={formData.contraseña}
+            onChange={handleChange}
+            fullWidth
+            required
+            sx={{ mb: 3 }}
+          />
+          <Stack spacing={2}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                bgcolor: "#2B7781",
+                fontSize: "1.1rem",
+                py: 1.5,
+                borderRadius: "50px",
+                "&:hover": {
+                  bgcolor: "#2B7781",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 6px 20px rgba(43, 119, 129, 0.4)",
+                },
+              }}
+            >
+              Iniciar Sesión
+            </Button>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => navigate("/register")}
+              sx={{
+                color: "#2B7781",
+                borderColor: "#2B7781",
+                fontSize: "1.1rem",
+                py: 1.5,
+                borderRadius: "50px",
+                "&:hover": {
+                  borderColor: "#2980b9",
+                  bgcolor: "rgba(52, 152, 219, 0.1)",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 6px 20px rgba(43, 119, 129, 0.4)",
+                },
+              }}
+            >
+              Crear Usuario
+            </Button>
+          </Stack>
+        </form>
+      </Paper>
     </Box>
   );
 };
