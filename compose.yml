@@ -1,4 +1,21 @@
 services:
+  # frontend service (vite)
+  viteapp:
+    container_name: viteapp
+    image: vite:1.0.0
+    build:
+      context: ./frontend
+      dockerfile: vite.dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    environment:
+      - VITE_API_URL=http://localhost:4000
+    depends_on:
+      - flaskapp
+
+
   # flask service
   flaskapp:
     container_name: flaskapp
@@ -28,3 +45,4 @@ services:
 
 volumes:
   pgdata: {}
+  node_modules: {}

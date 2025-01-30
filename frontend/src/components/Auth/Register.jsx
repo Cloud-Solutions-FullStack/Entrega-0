@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { showToast } from "../../utils/toast";
-import "../../styles/Auth.css";
+import "../../styles/auth.css";
 
 const Register = () => {
   const navigate = useNavigate();

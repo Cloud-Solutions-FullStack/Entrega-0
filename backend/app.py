@@ -42,7 +42,7 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
         "origins": [
-            "http://localhost:5173",
+            "http://localhost:3000",
             "http://localhost:4000"
         ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
