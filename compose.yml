@@ -15,7 +15,6 @@ services:
     depends_on:
       - flaskapp
 
-
   # flask service
   flaskapp:
     container_name: flaskapp

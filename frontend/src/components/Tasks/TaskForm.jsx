@@ -123,6 +123,7 @@ const TaskForm = ({ onSubmit, error }) => {
                   fecha_tentativa_finalizacion: newValue,
                 })
               }
+              disablePast
               sx={{ mb: 3, width: "100%" }}
               slots={{
                 textField: (params) => (
