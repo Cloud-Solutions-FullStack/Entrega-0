@@ -82,7 +82,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_usuario = db.Column(db.String(80), unique=True, nullable=False)
     contrasenia = db.Column(db.String(120), unique=False, nullable=False)
-    imagen_perfil = db.Column(db.String(1000), unique=True, nullable=True)
+    imagen_perfil = db.Column(db.String(1000), unique=False, nullable=True)
   
     def validate_password(self, password):
         if len(password) < 8:
