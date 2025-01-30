@@ -1,6 +1,7 @@
 services:
   # frontend service (vite)
   viteapp:
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
     container_name: viteapp
     image: vite:1.0.0
     build:
