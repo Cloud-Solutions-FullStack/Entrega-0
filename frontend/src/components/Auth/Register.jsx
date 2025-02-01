@@ -1,3 +1,12 @@
+// -----------------------------------------------------------------------------
+// Autor: Santiago Bobadilla Suarez
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Bibliotecas
+// -----------------------------------------------------------------------------
+
+// React y Material-UI
 import React, { useState } from "react";
 import {
   TextField,
@@ -8,12 +17,24 @@ import {
   Paper,
   Stack,
 } from "@mui/material";
+
+// Navegación y Servicios
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { showToast } from "../../utils/toast";
+
+// Estilos
 import "../../styles/auth.css";
 
+// -----------------------------------------------------------------------------
+// Componente de Registro
+// -----------------------------------------------------------------------------
+// - Maneja el registro de nuevos usuarios
+// - Validación de campos y contraseñas
+// - Gestión de imagen de perfil
+// - Redirección post-registro
 const Register = () => {
+  // Estado y navegación
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre_usuario: "",
@@ -23,6 +44,7 @@ const Register = () => {
   });
   const [error, setError] = useState("");
 
+  // Manejo de cambios en el formulario
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -30,6 +52,10 @@ const Register = () => {
     });
   };
 
+  // Envío del formulario
+  // - Valida coincidencia de contraseñas
+  // - Establece imagen por defecto si no se provee
+  // - Registra usuario y maneja respuesta
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.contrasenia !== formData.confirmar_contrasenia) {
@@ -37,7 +63,6 @@ const Register = () => {
       return;
     }
 
-    // Set default profile image if empty
     const imagen_perfil =
       formData.imagen_perfil ||
       "https://i.pinimg.com/736x/d4/3c/22/d43c22f0698b776391f59313e7b22a73.jpg";
@@ -55,14 +80,20 @@ const Register = () => {
     }
   };
 
+  // -----------------------------------------------------------------------------
+  // Renderizado del Componente
+  // -----------------------------------------------------------------------------
   return (
+    // Contenedor principal con estilos de autenticación
     <Box className="auth-container">
+      {/* Tarjeta contenedora del formulario */}
       <Paper className="auth-card" elevation={0}>
+        {/* Título de la aplicación */}
         <Typography
           variant="h1"
           className="title"
           sx={{
-            fontSize: "clamp(2rem, 6vw, 3.5rem)",
+            fontSize: "clamp(2rem, 6vw, 3.5rem)", // Tamaño responsivo
             fontWeight: 800,
             color: "#2c3e50",
             mb: 2,
@@ -71,11 +102,13 @@ const Register = () => {
         >
           TaskHub
         </Typography>
+
+        {/* Subtítulo de registro */}
         <Typography
           variant="h4"
           className="subtitle"
           sx={{
-            fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+            fontSize: "clamp(1rem, 2.5vw, 1.5rem)", // Tamaño responsivo
             color: "#34495e",
             mb: 4,
             textAlign: "center",
@@ -84,13 +117,16 @@ const Register = () => {
           Crea tu cuenta
         </Typography>
 
+        {/* Alerta de error condicional */}
         {error && (
           <Alert severity="error" sx={{ mb: 2, width: "100%" }}>
             {error}
           </Alert>
         )}
 
+        {/* Formulario de registro */}
         <form onSubmit={handleSubmit} className="auth-form">
+          {/* Campo: Nombre de Usuario */}
           <TextField
             name="nombre_usuario"
             label="Nombre de Usuario"
@@ -100,6 +136,8 @@ const Register = () => {
             required
             sx={{ mb: 2 }}
           />
+
+          {/* Campo: Contraseña */}
           <TextField
             name="contrasenia"
             label="Contraseña"
@@ -110,6 +148,8 @@ const Register = () => {
             required
             sx={{ mb: 2 }}
           />
+
+          {/* Campo: Confirmar Contraseña */}
           <TextField
             name="confirmar_contrasenia"
             label="Confirmar Contraseña"
@@ -120,6 +160,8 @@ const Register = () => {
             required
             sx={{ mb: 2 }}
           />
+
+          {/* Campo: URL de Imagen de Perfil */}
           <TextField
             name="imagen_perfil"
             label="URL Imagen de Perfil (Opcional)"
@@ -130,7 +172,10 @@ const Register = () => {
             placeholder="https://..."
             helperText="Deja en blanco para usar imagen por defecto"
           />
+
+          {/* Contenedor de botones */}
           <Stack spacing={1}>
+            {/* Botón de Registro */}
             <Button
               type="submit"
               variant="contained"
@@ -149,6 +194,8 @@ const Register = () => {
             >
               Registrarse
             </Button>
+
+            {/* Botón para volver al Login */}
             <Button
               variant="outlined"
               fullWidth

@@ -11,6 +11,7 @@ export const getTasksByUser = async (userId) => {
 };
 
 export const updateTask = async (taskId, taskData) => {
+  console.log("taskData", taskData);
   const response = await api.put(`/tareas/${taskId}`, taskData);
   return response.data;
 };

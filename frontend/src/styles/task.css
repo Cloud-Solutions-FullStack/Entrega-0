@@ -1,3 +1,8 @@
+/* -----------------------------------------------------------------------------
+ * Contenedor del Formulario de Tareas
+ * - Centrado y ancho completo
+ * - Animación de entrada
+ * -------------------------------------------------------------------------- */
 .task-form-container {
   display: flex;
   justify-content: center;
@@ -6,6 +11,12 @@
   animation: fadeIn 0.8s ease-out;
 }
 
+/* -----------------------------------------------------------------------------
+ * Tarjeta del Formulario
+ * - Efecto glassmorphism
+ * - Tamaño y espaciado responsivo
+ * - Animación de entrada
+ * -------------------------------------------------------------------------- */
 .task-form-card {
   background: rgba(255, 254, 254, 0.7) !important;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -19,6 +30,11 @@
   animation: fadeIn 0.8s ease-out;
 }
 
+/* -----------------------------------------------------------------------------
+ * Formulario de Tarea
+ * - Layout vertical
+ * - Espaciado consistente
+ * -------------------------------------------------------------------------- */
 .task-form {
   width: 100%;
   display: flex;
@@ -26,6 +42,10 @@
   gap: 1rem;
 }
 
+/* -----------------------------------------------------------------------------
+ * Animación de Entrada
+ * - Fade in desde abajo
+ * -------------------------------------------------------------------------- */
 @keyframes fadeIn {
   from {
     opacity: 0;

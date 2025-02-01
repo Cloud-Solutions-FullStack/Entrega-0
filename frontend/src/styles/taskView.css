@@ -1,3 +1,8 @@
+/* -----------------------------------------------------------------------------
+ * Contenedor Principal de Vista de Tareas
+ * - Layout de página completa
+ * - Fondo fijo con overlay
+ * -------------------------------------------------------------------------- */
 .task-view-container {
   min-height: 100vh;
   width: 100vw;
@@ -13,17 +18,30 @@
   background-attachment: fixed;
 }
 
+/* -----------------------------------------------------------------------------
+ * Sección de Encabezado
+ * - Espaciado y animación
+ * -------------------------------------------------------------------------- */
 .header-section {
   margin-bottom: 2rem;
   animation: fadeIn 0.8s ease-out;
 }
 
+/* -----------------------------------------------------------------------------
+ * Sección de Contenido
+ * - Layout con flexbox
+ * - Distribución de elementos
+ * -------------------------------------------------------------------------- */
 .content-section {
   display: flex;
   gap: 2rem;
   margin-top: 1rem;
 }
 
+/* -----------------------------------------------------------------------------
+ * Secciones de Formulario y Tareas
+ * - Dimensiones y layout
+ * -------------------------------------------------------------------------- */
 .form-section {
   flex: 0 0 400px;
 }
@@ -32,6 +50,10 @@
   flex: 1;
 }
 
+/* -----------------------------------------------------------------------------
+ * Animación de Entrada
+ * - Fade in desde abajo
+ * -------------------------------------------------------------------------- */
 @keyframes fadeIn {
   from {
     opacity: 0;

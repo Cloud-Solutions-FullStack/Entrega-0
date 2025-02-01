@@ -1,14 +1,42 @@
+// -----------------------------------------------------------------------------
+// Autor: Santiago Bobadilla Suarez
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Bibliotecas
+// -----------------------------------------------------------------------------
+
+// React y Material-UI
+// - React: Biblioteca base
+// - Box, Button, Typography, Paper: Componentes de Material-UI
 import React from "react";
 import { Box, Button, Typography, Paper } from "@mui/material";
+
+// Navegación
+// - useNavigate: Hook para navegación programática
 import { useNavigate } from "react-router-dom";
+
+// Estilos
 import "../styles/home.css";
 
+// -----------------------------------------------------------------------------
+// Página Principal
+// -----------------------------------------------------------------------------
+// Componente que muestra la página de inicio
+// - Título de la aplicación
+// - Subtítulo descriptivo
+// - Botón de acción principal
 const HomePage = () => {
+  // Hook de navegación
   const navigate = useNavigate();
 
+  // Renderizado del componente
   return (
+    // Contenedor principal con fondo y estilos
     <Box className="home-container">
+      {/* Tarjeta de contenido principal */}
       <Paper className="content-card" elevation={0}>
+        {/* Título de la aplicación */}
         <Typography
           variant="h1"
           className="title"
@@ -22,6 +50,8 @@ const HomePage = () => {
         >
           TaskHub
         </Typography>
+
+        {/* Subtítulo descriptivo */}
         <Typography
           variant="h4"
           className="subtitle"
@@ -34,6 +64,8 @@ const HomePage = () => {
         >
           El centro de tu productividad diaria.
         </Typography>
+
+        {/* Botón de acción principal */}
         <Button
           variant="contained"
           className="action-button"

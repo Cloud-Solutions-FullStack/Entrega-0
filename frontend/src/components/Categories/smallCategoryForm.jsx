@@ -1,15 +1,39 @@
+// -----------------------------------------------------------------------------
+// Autor: Santiago Bobadilla Suarez
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Bibliotecas
+// -----------------------------------------------------------------------------
+
+// React y Material-UI
 import React, { useState } from "react";
 import { TextField, Button, Paper, Alert } from "@mui/material";
+
+// Servicios
 import { createCategory } from "../../services/categoryService";
+
+// Estilos
 import "../../styles/smallCategoria.css";
 
+// -----------------------------------------------------------------------------
+// Formulario Compacto de Categorías
+// -----------------------------------------------------------------------------
+// Props:
+// - userId: ID del usuario actual
+// - onCategoryCreated: Callback al crear categoría
 const SmallCategoryForm = ({ userId, onCategoryCreated }) => {
+  // Estado del formulario
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
   });
   const [error, setError] = useState("");
 
+  // Manejo del envío del formulario
+  // - Crea nueva categoría
+  // - Limpia formulario al éxito
+  // - Maneja errores
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,15 +48,21 @@ const SmallCategoryForm = ({ userId, onCategoryCreated }) => {
     }
   };
 
+  // -----------------------------------------------------------------------------
+  // Renderizado del Componente
+  // -----------------------------------------------------------------------------
   return (
     <Paper className="small-category-form" elevation={0}>
+      {/* Mensaje de Error */}
       {error && (
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
         </Alert>
       )}
 
+      {/* Formulario de Categoría */}
       <form onSubmit={handleSubmit}>
+        {/* Campo: Nombre */}
         <TextField
           name="nombre"
           label="Nombre"
@@ -42,6 +72,8 @@ const SmallCategoryForm = ({ userId, onCategoryCreated }) => {
           fullWidth
           sx={{ mb: 2 }}
         />
+
+        {/* Campo: Descripción */}
         <TextField
           name="descripcion"
           label="Descripción"
@@ -54,6 +86,8 @@ const SmallCategoryForm = ({ userId, onCategoryCreated }) => {
           rows={3}
           sx={{ mb: 3 }}
         />
+
+        {/* Botón de Envío */}
         <Button
           type="submit"
           variant="contained"

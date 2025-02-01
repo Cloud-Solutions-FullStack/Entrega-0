@@ -13,21 +13,20 @@ Este proyecto consiste en una aplicación web para la gestión de listas de tare
 ### Autenticación de Usuarios
 
 - Creación de cuenta con usuario y contraseña.
-- Posibilidad de cargar una imagen de perfil.
+- Posibilidad de cargar una imagen de perfil (URL).
 - Si el usuario no carga una foto, el sistema coloca un icono por defecto.
 - Inicio de sesión y cierre de sesión.
 
 ### Gestión de Listas y Tareas
 
-- Captura de texto que representa una tarea.
 - Organización de tareas en categorías (por ejemplo, Hogar, Trabajo, Urgente, entre otras).
-- Creación y eliminación de categorías.
+- Creación y eliminación de categorías propias del usuario.
 
 ### Estados y Fechas
 
 - Asignación de cada tarea a al menos un estado: Sin Empezar, Empezada, Finalizada.
 - Actualización de estados por parte del usuario.
-- Registro de la fecha de creación de la tarea para futura trazabilidad y analítica.
+- Registro de la fecha de creación de la tarea para trazabilidad y analítica.
 
 ### Operaciones sobre Tareas
 
@@ -47,17 +46,17 @@ La API REST de la aplicación de gestión de tareas cubre las funcionalidades b�
 ### Tareas
 
 - Obtener Lista de Tareas por Usuario (GET /usuarios/{id}/tareas)
-- Crear Tarea (POST /tareas)
-- Actualizar Tarea (PUT /tareas/{id})
-- Eliminar Tarea (DELETE /tareas/{id})
-- Obtener Tarea por ID (GET /tareas/{id})
+- Crear Tarea de un Usuario (POST /tareas)
+- Actualizar Tarea de un Usuario (PUT /tareas/{id})
+- Eliminar Tarea de un Usuario (DELETE /tareas/{id})
+- Obtener Tarea por ID de un Usuario (GET /tareas/{id})
 
 ### Categorías
 
-- Crear Categoría (POST /categorias)
-- Eliminar Categoría (DELETE /categorias/{id})
-- Obtener Lista de Categorías (GET /categorias)
-- Actualizar Categoría (PUT /categorias/{id})
+- Crear Categoría de un Usuario (POST categorias)
+- Eliminar Categoría de un Usuario (DELETE /categorias/{id})
+- Obtener Lista de Categorías de un Usuario (GET /usuarios/{id}/categorias)
+- Actualizar Categoría de un Usuario (PUT /categorias/{id})
 
 ### Autorización y Seguridad
 
@@ -68,7 +67,8 @@ La API REST de la aplicación de gestión de tareas cubre las funcionalidades b�
 El proyecto se divide en dos grandes carpetas:
 
 1. **frontend/**: Contiene la aplicación React con sus componentes, servicios y estilos.
-2. **backend/**: Alberga la API REST, con toda la lógica de negocio, modelos y rutas de Flask (o tecnología equivalente).
+2. **backend/**: Alberga la API REST, con toda la lógica de negocio, modelos y rutas de Flask.
+3. **db**: Alberga la base de datos en PostgresSQL
 
 Cada carpeta cuenta con su respectiva configuración para instalación de dependencias, así como archivos de configuración para servicios como Docker o Vite (en el caso de React).
 
@@ -78,13 +78,10 @@ Cada carpeta cuenta con su respectiva configuración para instalación de depend
   Framework JavaScript para la construcción de interfaces de usuario. Permite la creación de componentes reutilizables y maneja la lógica de la vista de manera eficiente.
 - **Axios**  
   Biblioteca para realizar peticiones HTTP desde el frontend. Facilita la comunicación con la API, incluyendo el manejo de tokens de autenticación.
-
 - **Flask**  
   Microframework de Python para construir la API REST. Proporciona herramientas para definir rutas y gestionar solicitudes HTTP.
-
 - **SQLAlchemy**  
   ORM para interactuar con la base de datos. Simplifica las operaciones de creación, lectura, actualización y eliminación de registros.
-
 - **JWT**  
   JSON Web Tokens para la autenticación y autorización en la API, asegurando que cada petición sensible cuente con un token válido.
 
@@ -98,143 +95,262 @@ Cada carpeta cuenta con su respectiva configuración para instalación de depend
 
 Este esquema de microservicios asegura que la aplicación sea escalable y permita actualizaciones independientes de cada componente.
 
-## FrontEnd
+# FrontEnd
 
 ### Estructura del Proyecto
 
-El directorio `frontend` tiene la siguiente estructura:
+El directorio `frontend` implementa una aplicación React moderna, estructurada en componentes, servicios y estilos:
 
-### Estructura del Proyecto
+### Componentes Principales
 
-El directorio `frontend` organiza la base del proyecto React con archivos y carpetas para componentes, servicios y estilos. Cada sección cumple un rol definido, permitiendo separar la lógica (servicios), la presentación (componentes, estilos) y el flujo de navegación (rutas).
+#### `src/App.jsx`
 
-### `src/App.jsx`
+- Gestión de rutas con `react-router-dom`
+- Protección de rutas privadas mediante token JWT
+- Estructura de navegación responsive
 
-Gestiona la navegación usando `react-router-dom`. Establece rutas públicas (inicio de sesión, registro, página de inicio) y rutas privadas que requieren token de autenticación. De esta forma, evita que el usuario acceda a secciones sin credenciales válidas.
+#### `src/main.jsx`
 
-### `src/main.jsx`
+- Inicialización de la aplicación
+- Configuración de proveedores globales:
+  - `ToastContainer` para notificaciones
+  - `LocalizationProvider` para fechas
+  - Tema personalizado de Material-UI
 
-Se encarga de montar la aplicación en el DOM. Inicializa la configuración global (por ejemplo, `<ToastContainer>` para notificaciones) y envuelve la app en proveedores como `LocalizationProvider` para compatibilidad con pickers de fechas.
+### Módulos de Autenticación
 
-### `src/components/Auth/Login.jsx`
+#### `src/components/Auth/Login.jsx`
 
-Renderiza un formulario de inicio de sesión y maneja el proceso de autenticación: envía las credenciales al backend, valida la respuesta y, en caso de éxito, guarda el token en `localStorage`. Si falla, muestra un mensaje de error al usuario.
+- Formulario de inicio de sesión con Material-UI
+- Validación de credenciales
+- Gestión de token JWT en localStorage
+- Manejo de errores y feedback visual
+- Redirección post-login
 
-### `src/components/Auth/Register.jsx`
+#### `src/components/Auth/Register.jsx`
 
-Ofrece un formulario de registro. Verifica campos como la confirmación de contraseña y, si todo es válido, crea una nueva cuenta en el backend. Permite añadir una imagen de perfil o usar una por defecto. Al terminar, redirige a la pantalla de inicio de sesión.
+- Registro de usuarios con validación
+- Gestión de imagen de perfil (URL o default)
+- Confirmación de contraseña
+- Feedback visual con Material-UI Alert
+- Animaciones de transición
 
-### `src/components/Categories/CategoryForm.jsx`
+### Gestión de Datos
 
-Proporciona un formulario sencillo para crear categorías y manejar datos del usuario (vía props). Invoca los métodos del servicio correspondiente y, tras la creación exitosa, notifica o actualiza el estado en la vista que lo integra.
+#### `src/components/Categories/CategoryForm.jsx`
 
-### `src/components/Tasks/TaskForm.jsx`
+- Creación de categorías con validación
+- Integración con categoryService
+- Efectos glassmorphism en UI
+- Formulario compacto y completo
 
-Permite crear tareas con datos como texto, categoría y fecha límite. Valida la información antes de enviarla al backend y actualiza la lista de tareas o notifica al usuario luego de la respuesta.
+#### `src/components/Tasks/TaskForm.jsx`
 
-### `src/components/Tasks/TaskList.jsx`
+- Creación de tareas con múltiples campos
+- Selector de categorías dinámico
+- DatePicker para fechas límite
+- Validación de campos requeridos
 
-Recibe la lista de tareas y las muestra agrupando información (texto, estado, fechas). Facilita el cambio de estado con un menú desplegable y el borrado de tareas con un botón. Cada acción se comunica con el backend para mantener la persistencia.
+#### `src/components/Tasks/TaskList.jsx`
 
-### `src/services/api.js`
+- Visualización de tareas con estados
+- Cambio de estado mediante Select
+- Eliminación de tareas
+- Colores dinámicos según estado
+- Animaciones en hover
 
-Configura Axios para unificar las solicitudes HTTP al backend. Incluye interceptores que añaden el token JWT a cada petición y capturan errores 401, forzando el cierre de sesión si el token es inválido. Esto centraliza la autenticación y manejo de errores.
+### Servicios API
 
-### `src/services/categoryService.js`
+#### `src/services/api.js`
 
-Define métodos concretos para crear y obtener categorías llamando a los endpoints del backend. Por ejemplo, `createCategory` envía un objeto con la información de la categoría, y `getUserCategories` recupera todas las categorías de un usuario.
+- Cliente Axios configurado
+- Interceptores para:
+  - Tokens JWT
+  - Errores de autenticación
+  - Respuestas globales
 
-### `src/services/taskService.js`
+#### `src/services/categoryService.js`
 
-Ofrece métodos similares, pero enfocados en tareas (crear, obtener, actualizar, eliminar). Cada función se comunica con la API ajustando los parámetros y la ruta según el tipo de operación.
+- CRUD de categorías
+- Métodos:
+  - createCategory
+  - getUserCategories
+  - deleteCategory
 
-### `src/styles/`
+#### `src/services/taskService.js`
 
-Reúne archivos CSS para cada componente, vista o sección. Esto aísla los estilos de cada parte de la app, manteniendo el diseño coherente. Incluye animaciones, fondos e interfaces responsivas, favoreciendo la legibilidad del código y el mantenimiento.
+- CRUD completo de tareas
+- Gestión de estados
+- Métodos para filtrado y ordenamiento
 
-## Backend
+### Estilos y UX
 
-### Estructura del Proyecto
+#### `src/styles/`
 
-El directorio `backend` tiene la siguiente estructura:
+Estilos modulares con características:
 
-### Descripción de Archivos
+- Efectos glassmorphism
+- Animaciones de entrada/salida
+- Diseño responsivo
+- Temas consistentes
+- Hover effects
+- Fondos dinámicos
 
-#### `app.py`
+### Configuración Docker
 
-Este archivo contiene la configuración de la aplicación Flask, los modelos de base de datos y las rutas para los endpoints de la API REST.
+- Imagen base: `node:18-alpine`
+- Optimización de capas
+- Servidor de producción con `serve`
+- Exposición del puerto 3000
 
-- **Configuración de la Aplicación**: Configura la aplicación Flask, CORS, SQLAlchemy y JWT.
-- **Modelos de Base de Datos**: Define los modelos `User`, `Category` y `Task`.
-- **Rutas/CRUD**: Define las rutas para crear, leer, actualizar y eliminar usuarios, tareas y categorías.
+# Backend
 
-#### `flask.dockerfile`
+## Estructura del Proyecto
 
-Este archivo define la configuración para construir una imagen Docker de la aplicación Flask.
+El directorio `backend` contiene la implementación del servidor REST API:
 
-- **Base Image**: Utiliza `python:3.6-slim-buster`.
-- **Working Directory**: Establece `/app` como el directorio de trabajo.
-- **Dependencies**: Copia `requirements.txt` y ejecuta `pip install`.
-- **Copy Application**: Copia el contenido del directorio actual al contenedor.
-- **Expose Port**: Expone el puerto `4000`.
-- **Command**: Ejecuta el comando `flask run --host=0.0.0.0 --port=4000`.
+## Descripción de Archivos
 
-#### `requirements.txt`
+### `app.py`
 
-Este archivo lista las dependencias necesarias para la aplicación Flask.
+Archivo principal que contiene la implementación del servidor:
 
-- **Flask**: Framework web.
-- **psycopg2-binary**: Adaptador de base de datos PostgreSQL.
-- **Flask-SQLAlchemy**: ORM para bases de datos.
-- **Flask-CORS**: Soporte para Cross-Origin Resource Sharing.
-- **marshmallow**: Biblioteca de validación y serialización.
-- **werkzeug**: Utilidades para hashing de contraseñas.
-- **flask_jwt_extended**: Soporte para JSON Web Tokens.
+#### Configuración
 
-### Documentación de Modelos de Base de Datos
+- **Flask**: Configuración base de la aplicación web
+- **CORS**: Permite peticiones desde `http://localhost:3000`
+- **SQLAlchemy**: Configuración de la base de datos
+- **JWT**: Autenticación con tokens, expiración 1 hora
 
-- Plan de Modelado
-- Documentación del modelo Usuario
-- Documentación del modelo Categoría
-- Documentación del modelo Tarea
-- Mostrar relaciones entre modelos
-- Incluir esquema SQL
-- Estructura de Modelos
+#### Modelos de Base de Datos
+
+##### Usuario (`User`)
+
+- **Atributos**:
+  - `id`: Integer (PK)
+  - `nombre_usuario`: String(80), único
+  - `contrasenia`: String(120), hasheada
+  - `imagen_perfil`: String(1000), opcional
+- **Métodos**:
+  - `validate_password()`: Valida requisitos de contraseña
+  - `set_password()`: Hashea y guarda contraseña
+  - `check_password()`: Verifica contraseña
+  - `json()`: Serializa datos del usuario
+
+##### Categoría (`Category`)
+
+- **Atributos**:
+  - `id`: Integer (PK)
+  - `nombre`: String(80)
+  - `descripcion`: String(250), opcional
+  - `user_id`: Integer (FK -> User)
+- **Métodos**:
+  - `json()`: Serializa datos de la categoría
+
+##### Tarea (`Task`)
+
+- **Atributos**:
+  - `id`: Integer (PK)
+  - `texto_tarea`: String(250)
+  - `fecha_creacion`: DateTime, automática
+  - `fecha_tentativa_finalizacion`: DateTime, opcional
+  - `estado`: String(20), valores: ['PENDIENTE', 'EN_PROGRESO', 'FINALIZADA']
+  - `user_id`: Integer (FK -> User)
+  - `category_id`: Integer (FK -> Category)
+- **Métodos**:
+  - `validate_estado()`: Valida estado de la tarea
+  - `json()`: Serializa datos de la tarea
+
+#### Endpoints API
+
+##### Usuarios
+
+- `POST /usuarios`: Crear usuario nuevo
+- `POST /usuarios/login`: Iniciar sesión
+- `POST /usuarios/logout`: Cerrar sesión
+- `GET /usuarios`: Listar usuarios
+- `GET /usuarios/<id>`: Obtener usuario
+- `PUT /usuarios/<id>`: Actualizar usuario
+- `DELETE /usuarios/<id>`: Eliminar usuario
+
+##### Categorías
+
+- `POST /categorias`: Crear categoría
+- `GET /categorias`: Listar categorías
+- `GET /categorias/<id>`: Obtener categoría
+- `GET /usuario/<user_id>/categorias`: Categorías por usuario
+- `PUT /categorias/<id>`: Actualizar categoría
+- `DELETE /categorias/<id>`: Eliminar categoría
+
+##### Tareas
+
+- `POST /tareas`: Crear tarea
+- `GET /tareas`: Listar tareas
+- `GET /tareas/<id>`: Obtener tarea
+- `GET /usuario/<user_id>/tareas`: Tareas por usuario
+- `PUT /tareas/<id>`: Actualizar tarea
+- `DELETE /tareas/<id>`: Eliminar tarea
+
+### `flask.dockerfile`
+
+Configuración para construir la imagen Docker:
+
+- Base: `python:3.6-slim-buster`
+- Directorio: `/app`
+- Puerto: `4000`
+- Comando: `flask run --host=0.0.0.0 --port=4000`
+
+### `requirements.txt`
+
+Dependencias principales:
+
+- Flask y extensiones (SQLAlchemy, CORS, JWT)
+- PostgreSQL adapter
+- Utilidades (marshmallow, werkzeug)
+
+## Relaciones entre Modelos
 
 ```mermaid
 classDiagram
-class User {
-+Integer id
-+String nombre_usuario
-+String contrasenia
-+String imagen_perfil
-+validate_password(password)
-+set_password(password)
-+check_password(password)
-+json()
-}
+    User "1" -- "*" Category : tiene
+    User "1" -- "*" Task : crea
+    Category "1" -- "*" Task : contiene
 
-class Category {
-+Integer id
-+String nombre
-+String descripcion
-}
+    class User {
+        +Integer id
+        +String nombre_usuario
+        +String contrasenia
+        +String imagen_perfil
+        +validate_password(password)
+        +set_password(password)
+        +check_password(password)
+        +json()
+    }
 
-class Task {
-+Integer id
-+String texto_tarea
-+DateTime fecha_creacion
-+DateTime fecha_tentativa_finalizacion
-+String estado
-+Integer user_id
-+Integer category_id
-+json()
-}
+    class Category {
+        +Integer id
+        +String nombre
+        +String descripcion
+        +Integer user_id
+        +json()
+    }
+
+    class Task {
+        +Integer id
+        +String texto_tarea
+        +DateTime fecha_creacion
+        +DateTime fecha_tentativa_finalizacion
+        +String estado
+        +Integer user_id
+        +Integer category_id
+        +validate_estado()
+        +json()
+    }
 ```
 
 ## Cómo Ejecutar el Proyecto
 
-1. **Clonar el Repositorio**  
+1. **Clonar el Repositorio**
    Clona el repositorio en tu máquina local.
 
 2. **Configurar Backend**
@@ -269,12 +385,4 @@ class Task {
      ```
    - Asegúrate de que los contenedores de frontend y backend se inicien sin errores.
 
-Una vez realizados estos pasos, podrás acceder al frontend en el navegador (por defecto http://localhost:5173 o el puerto configurado) y el backend responderá desde http://localhost:5000 (o tu configuración asignada).
-
-# Sección de la carpeta de pruebas y documentación
-
-Aquí puedes documentar las pruebas y sus resultados:
-
-- Explica el flujo de los test.
-- Describe cómo se validan las respuestas.
-- Incluye pasos para ejecutar las pruebas.
+Una vez realizados estos pasos, podrás acceder al frontend en el navegador (por defecto http://localhost:3000) y el backend responderá desde http://localhost:4000.

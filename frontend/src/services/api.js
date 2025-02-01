@@ -1,5 +1,17 @@
+// -----------------------------------------------------------------------------
+// Autor: Santiago Bobadilla Suarez
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Configuración de Cliente HTTP
+// -----------------------------------------------------------------------------
+
+// Axios: Cliente HTTP para realizar peticiones
 import axios from "axios";
 
+// Creación de instancia de axios con configuración base
+// - baseURL: URL base del servidor
+// - headers: Cabeceras por defecto
 const api = axios.create({
   baseURL: "http://localhost:4000",
   headers: {
@@ -7,6 +19,12 @@ const api = axios.create({
   },
 });
 
+// -----------------------------------------------------------------------------
+// Interceptores de Peticiones
+// -----------------------------------------------------------------------------
+
+// Interceptor de peticiones salientes
+// - Añade token de autenticación si existe
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -20,6 +38,9 @@ api.interceptors.request.use(
   }
 );
 
+// Interceptor de respuestas
+// - Maneja errores de autenticación
+// - Redirecciona a login si el token expira
 api.interceptors.response.use(
   (response) => response,
   (error) => {

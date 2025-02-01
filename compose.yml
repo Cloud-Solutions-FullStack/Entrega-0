@@ -1,5 +1,14 @@
+# -----------------------------------------------------------------------------
+# Autor: Santiago Bobadilla Suarez
+# -----------------------------------------------------------------------------
+
 services:
-  # frontend service (vite)
+  # -----------------------------------------------------------------------------
+  # Servicio Frontend (Vite)
+  # - Puerto 3000
+  # - Volumen para desarrollo
+  # - Variable de entorno para API
+  # -----------------------------------------------------------------------------
   viteapp:
     container_name: viteapp
     image: vite:1.0.0
@@ -15,7 +24,12 @@ services:
     depends_on:
       - flaskapp
 
-  # flask service
+  # -----------------------------------------------------------------------------
+  # Servicio Backend (Flask)
+  # - Puerto 4000
+  # - Conexión a base de datos
+  # - Variables de entorno para DB
+  # -----------------------------------------------------------------------------
   flaskapp:
     container_name: flaskapp
     image: flaskapp:1.0.0
@@ -29,7 +43,9 @@ services:
     depends_on:
       - db
 
-# db service
+  # -----------------------------------------------------------------------------
+  # Servicio Base de Datos (PostgreSQL)
+  # -----------------------------------------------------------------------------
   db:
     container_name: db
     image: postgres:17

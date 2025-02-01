@@ -1,3 +1,12 @@
+// -----------------------------------------------------------------------------
+// Autor: Santiago Bobadilla Suarez
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Bibliotecas
+// -----------------------------------------------------------------------------
+
+// React y Material-UI
 import React, { useState } from "react";
 import {
   Box,
@@ -8,11 +17,23 @@ import {
   Paper,
   Stack,
 } from "@mui/material";
+
+// Navegación y Servicios
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+
+// Estilos
 import "../../styles/auth.css";
 
+// -----------------------------------------------------------------------------
+// Componente de Login
+// -----------------------------------------------------------------------------
+// - Maneja la autenticación de usuarios
+// - Gestiona el formulario de inicio de sesión
+// - Almacena token y datos de usuario
+// - Redirecciona según resultado
 const Login = () => {
+  // Estado y navegación
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -20,6 +41,7 @@ const Login = () => {
     contraseña: "",
   });
 
+  // Manejo de cambios en el formulario
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -27,6 +49,10 @@ const Login = () => {
     });
   };
 
+  // Envío del formulario
+  // - Valida credenciales con el servidor
+  // - Almacena token y datos de usuario
+  // - Maneja errores de autenticación
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,9 +74,13 @@ const Login = () => {
     }
   };
 
+  // -----------------------------------------------------------------------------
+  // Renderizado del Componente
+  // -----------------------------------------------------------------------------
   return (
     <Box className="auth-container">
       <Paper className="auth-card" elevation={0}>
+        {/* Título y Subtítulo */}
         <Typography
           variant="h1"
           className="title"
@@ -77,12 +107,14 @@ const Login = () => {
           Inicia sesión para continuar
         </Typography>
 
+        {/* Mensaje de Error */}
         {error && (
           <Alert severity="error" sx={{ mb: 2, width: "100%" }}>
             {error}
           </Alert>
         )}
 
+        {/* Formulario de Login */}
         <form onSubmit={handleSubmit} className="auth-form">
           <TextField
             name="usuario"
@@ -105,6 +137,7 @@ const Login = () => {
             required
             sx={{ mb: 3 }}
           />
+          {/* Botones de Acción */}
           <Stack spacing={2}>
             <Button
               type="submit"

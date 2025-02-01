@@ -1,3 +1,9 @@
+/* -----------------------------------------------------------------------------
+ * Contenedor de Autenticación
+ * - Layout de página completa
+ * - Fondo con gradiente y imagen
+ * - Centrado de contenido
+ * -------------------------------------------------------------------------- */
 .auth-container {
   min-height: 100vh;
   width: 100vw;
@@ -15,6 +21,12 @@
   align-items: center;
 }
 
+/* -----------------------------------------------------------------------------
+ * Tarjeta de Autenticación
+ * - Efecto glassmorphism
+ * - Tamaño y espaciado responsivo
+ * - Animación de entrada
+ * -------------------------------------------------------------------------- */
 .auth-card {
   background: rgba(255, 254, 254, 0.7) !important;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -28,6 +40,11 @@
   animation: fadeIn 0.8s ease-out;
 }
 
+/* -----------------------------------------------------------------------------
+ * Formulario de Autenticación
+ * - Layout vertical
+ * - Espaciado consistente
+ * -------------------------------------------------------------------------- */
 .auth-form {
   width: 100%;
   display: flex;
@@ -35,6 +52,10 @@
   gap: 1rem;
 }
 
+/* -----------------------------------------------------------------------------
+ * Animación de Entrada
+ * - Fade in desde abajo
+ * -------------------------------------------------------------------------- */
 @keyframes fadeIn {
   from {
     opacity: 0;

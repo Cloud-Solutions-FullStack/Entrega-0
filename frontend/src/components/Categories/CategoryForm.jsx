@@ -1,3 +1,12 @@
+// -----------------------------------------------------------------------------
+// Autor: Santiago Bobadilla Suarez
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Bibliotecas
+// -----------------------------------------------------------------------------
+
+// React y Material-UI
 import React, { useState } from "react";
 import {
   Box,
@@ -7,21 +16,38 @@ import {
   Alert,
   Paper,
 } from "@mui/material";
+
+// Servicios
 import { createCategory } from "../../services/categoryService";
+
+// Estilos
 import "../../styles/categoria.css";
 
+// -----------------------------------------------------------------------------
+// Formulario de Categorías
+// -----------------------------------------------------------------------------
+// Props:
+// - userId: ID del usuario actual
+// - onCategoryCreated: Callback al crear categoría
+// - alertType: Tipo de alerta (info/warning)
+// - alertMessage: Mensaje de alerta
 const CategoryForm = ({
   userId,
   onCategoryCreated,
   alertType,
   alertMessage,
 }) => {
+  // Estado del formulario
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
   });
   const [error, setError] = useState("");
 
+  // Manejo del envío del formulario
+  // - Crea nueva categoría
+  // - Limpia formulario al éxito
+  // - Maneja errores
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -36,13 +62,19 @@ const CategoryForm = ({
     }
   };
 
+  // -----------------------------------------------------------------------------
+  // Renderizado del Componente
+  // -----------------------------------------------------------------------------
   return (
+    // Contenedor principal
     <Box className="category-container">
+      {/* Tarjeta del formulario */}
       <Paper className="category-card" elevation={0}>
+        {/* Título del formulario con tipografía responsiva */}
         <Typography
           variant="h4"
           sx={{
-            fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+            fontSize: "clamp(1.5rem, 4vw, 2.5rem)", // Tamaño adaptativo
             fontWeight: 700,
             color: "#2c3e50",
             mb: 3,
@@ -52,19 +84,23 @@ const CategoryForm = ({
           Nueva Categoría
         </Typography>
 
+        {/* Alerta informativa o de advertencia (condicional) */}
         {alertMessage && (
           <Alert severity={alertType} sx={{ mb: 3, width: "100%" }}>
             {alertMessage}
           </Alert>
         )}
 
+        {/* Alerta de error (condicional) */}
         {error && (
           <Alert severity="error" sx={{ mb: 2, width: "100%" }}>
             {error}
           </Alert>
         )}
 
+        {/* Formulario de categoría */}
         <form onSubmit={handleSubmit} className="category-form">
+          {/* Campo: Nombre de la categoría */}
           <TextField
             name="nombre"
             label="Nombre"
@@ -76,6 +112,8 @@ const CategoryForm = ({
             fullWidth
             sx={{ mb: 2 }}
           />
+
+          {/* Campo: Descripción de la categoría */}
           <TextField
             name="descripcion"
             label="Descripción"
@@ -88,6 +126,8 @@ const CategoryForm = ({
             rows={3}
             sx={{ mb: 3 }}
           />
+
+          {/* Botón de envío con efectos hover */}
           <Button
             type="submit"
             variant="contained"
