@@ -8,6 +8,8 @@ Este proyecto consiste en una aplicación web para la gestión de listas de tare
 - **Base de datos**: Almacena de manera estructurada la información relacionada con los usuarios y sus tareas.
 - **Interfaz web**: Ofrece a los usuarios una experiencia interactiva e intuitiva para administrar sus tareas y categorías, integrándose con los otros componentes.
 
+- **DEMO**: https://www.youtube.com/watch?v=M_bltqicMvk
+
 ## Funcionalidades
 
 ### Autenticación de Usuarios
